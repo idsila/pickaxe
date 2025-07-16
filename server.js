@@ -136,7 +136,7 @@ async function start(){
 
   await page.setUserAgent(myDevice.agent);
   //await page.setViewport({ width: myDevice.width, height: myDevice.height});
-  await page.setViewport({ width: 2502, height: 2005, deviceScaleFactor: 1 });
+  await page.setViewport({ width: 1000, height: 7862, deviceScaleFactor: 1 });
   
   await page.evaluateOnNewDocument(() => {
     // navigator.webdriver
