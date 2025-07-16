@@ -130,9 +130,20 @@ async function start(){
     '--no-first-run',
     '--no-zygote',
     '--single-process', 
-    '--disable-gpu'
+    '--disable-gpu',
+    '--disable-blink-features=AutomationControlled',
+    '--disable-infobars'
   ] });
   const page = await browser.newPage();
+
+  browser.on('targetcreated', async (target) => {
+    if (target.type() === 'page') {
+      const newPage = await target.page();
+      await newPage.setUserAgent(myDevice.agent);
+      await newPage.setViewport({ width: 1920, height: 1080 });
+      console.log('New page opened, user-agent set.');
+    }
+  });
 
   await page.setUserAgent(myDevice.agent);
   //await page.setViewport({ width: myDevice.width, height: myDevice.height});
