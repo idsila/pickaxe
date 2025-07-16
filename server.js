@@ -140,6 +140,48 @@ async function start(){
   
   await page.evaluateOnNewDocument(() => {
     // navigator.webdriver
+    const fakePlugins = [
+      {
+        name: 'Chrome PDF Plugin',
+        filename: 'internal-pdf-viewer',
+        description: 'Portable Document Format',
+      },
+      {
+        name: 'Chrome PDF Viewer',
+        filename: 'mhjfbmdgcfjbbpaeojofohoefgiehjai',
+        description: '',
+      },
+      {
+        name: 'Native Client',
+        filename: 'internal-nacl-plugin',
+        description: '',
+      },
+      {
+        name: 'Widevine Content Decryption Module',
+        filename: 'widevinecdmadapter.dll',
+        description: 'Widevine CDM for DRM',
+      },
+    ];
+  
+    const createPluginArray = () => {
+      const arr = fakePlugins.map((p, i) => {
+        return {
+          ...p,
+          __proto__: Plugin.prototype,
+        };
+      });
+      arr.__proto__ = PluginArray.prototype;
+      arr.length = fakePlugins.length;
+      arr.item = (index) => arr[index];
+      arr.namedItem = (name) => arr.find((plugin) => plugin.name === name);
+      return arr;
+    };
+  
+    Object.defineProperty(navigator, 'plugins', {
+      get: () => createPluginArray(),
+      configurable: true,
+    });
+
     Object.defineProperty(navigator, 'webdriver', {
       get: () => false,
     });
@@ -156,11 +198,6 @@ async function start(){
       parameters.name === 'notifications'
         ? Promise.resolve({ state: Notification.permission })
         : originalQuery(parameters);
-
-    // navigator.plugins
-    Object.defineProperty(navigator, 'plugins', {
-      get: () => [1, 2, 3, 4, 5],
-    });
 
     // navigator.languages
     Object.defineProperty(navigator, 'languages', {
