@@ -168,7 +168,7 @@ async function start(){
     });
   });
 
-  await page.goto('https://www.browserscan.net/ru/bot-detection');
+  await page.goto('https://bot.sannysoft.com/');
   delay(6);
   setInterval(async () => {
      //const wclick = myDevice.width-(326+Math.ceil(Math.random()*125))
