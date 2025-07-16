@@ -139,15 +139,17 @@ async function start(){
   browser.on('targetcreated', async (target) => {
     if (target.type() === 'page') {
       const newPage = await target.page();
+      await page.setUserAgent(myDevice.agent);
       await newPage.setUserAgent(myDevice.agent);
-      await newPage.setViewport({ width: 1920, height: 1080 });
+      await newPage.setViewport({ width: 500, height: 500 });
+      await page.setViewport({ width: 500, height: 500, deviceScaleFactor: 1 });
       console.log('New page opened, user-agent set.');
     }
   });
 
   await page.setUserAgent(myDevice.agent);
   //await page.setViewport({ width: myDevice.width, height: myDevice.height});
-  await page.setViewport({ width: 1000, height: 7862, deviceScaleFactor: 1 });
+  await page.setViewport({ width: 500, height: 500, deviceScaleFactor: 1 });
   
   await page.evaluateOnNewDocument(() => {
     // navigator.webdriver
@@ -269,7 +271,7 @@ async function start(){
     };
   });
 
-  await page.goto('https://bot.sannysoft.com/');
+  await page.goto('https://best-earn.vercel.app/');
   delay(6);
   setInterval(async () => {
      //const wclick = myDevice.width-(326+Math.ceil(Math.random()*125))
