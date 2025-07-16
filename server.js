@@ -146,7 +146,7 @@ async function start(){
     });
   });
 
-  await page.goto('https://amiunique.org/fingerprint');
+  await page.goto('https://youproxy.io/ru/tools/fingerprint-scanner/');
   delay(6);
   setInterval(async () => {
      //const wclick = myDevice.width-(326+Math.ceil(Math.random()*125))
