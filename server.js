@@ -136,13 +136,35 @@ async function start(){
 
   await page.setUserAgent(myDevice.agent);
   //await page.setViewport({ width: myDevice.width, height: myDevice.height});
-  await page.setViewport({ width: 2502, height: 2005});
+  await page.setViewport({ width: 2502, height: 2005, deviceScaleFactor: 1 });
   
   await page.evaluateOnNewDocument(() => {
-    Object.defineProperties(navigator, {
-      webdriver: { get: () => false },
-      plugins: { get: () => [1, 2, 3] },
-      mimeTypes: { get: () => ({ 'application/pdf': 'PDF Viewer' }) }
+    // navigator.webdriver
+    Object.defineProperty(navigator, 'webdriver', {
+      get: () => false,
+    });
+
+    // window.chrome
+    window.chrome = {
+      runtime: {},
+      // Можешь добавить другие свойства если нужно
+    };
+
+    // navigator.permissions
+    const originalQuery = window.navigator.permissions.query;
+    window.navigator.permissions.query = (parameters) =>
+      parameters.name === 'notifications'
+        ? Promise.resolve({ state: Notification.permission })
+        : originalQuery(parameters);
+
+    // navigator.plugins
+    Object.defineProperty(navigator, 'plugins', {
+      get: () => [1, 2, 3, 4, 5],
+    });
+
+    // navigator.languages
+    Object.defineProperty(navigator, 'languages', {
+      get: () => ['en-US', 'en'],
     });
   });
 
