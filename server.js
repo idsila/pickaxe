@@ -140,6 +140,29 @@ async function start(){
   
   await page.evaluateOnNewDocument(() => {
     // navigator.webdriver
+    Object.defineProperty(navigator, 'webdriver', {
+      get: () => false,
+    });
+
+    // window.chrome
+    window.chrome = {
+      runtime: {},
+      // добавь другие свойства если нужно
+    };
+
+    // navigator.permissions
+    const originalQuery = window.navigator.permissions.query;
+    window.navigator.permissions.query = (parameters) =>
+      parameters.name === 'notifications'
+        ? Promise.resolve({ state: Notification.permission })
+        : originalQuery(parameters);
+
+    // navigator.languages
+    Object.defineProperty(navigator, 'languages', {
+      get: () => ['en-US', 'en'],
+    });
+
+    // navigator.plugins
     const fakePlugins = [
       {
         name: 'Chrome PDF Plugin',
@@ -162,47 +185,77 @@ async function start(){
         description: 'Widevine CDM for DRM',
       },
     ];
-  
-    const createPluginArray = () => {
-      const arr = fakePlugins.map((p, i) => {
-        return {
-          ...p,
-          __proto__: Plugin.prototype,
-        };
-      });
-      arr.__proto__ = PluginArray.prototype;
-      arr.length = fakePlugins.length;
-      arr.item = (index) => arr[index];
-      arr.namedItem = (name) => arr.find((plugin) => plugin.name === name);
-      return arr;
-    };
-  
+    const fakePluginArray = fakePlugins.map(p => {
+      return Object.setPrototypeOf(p, Plugin.prototype);
+    });
+    Object.setPrototypeOf(fakePluginArray, PluginArray.prototype);
     Object.defineProperty(navigator, 'plugins', {
-      get: () => createPluginArray(),
-      configurable: true,
+      get: () => fakePluginArray,
     });
 
-    Object.defineProperty(navigator, 'webdriver', {
-      get: () => false,
+    // navigator.mimeTypes
+    const fakeMimeTypes = [
+      {
+        type: 'application/pdf',
+        description: '',
+        suffixes: 'pdf',
+        enabledPlugin: fakePlugins[0],
+      }
+    ];
+    Object.setPrototypeOf(fakeMimeTypes, MimeTypeArray.prototype);
+    Object.defineProperty(navigator, 'mimeTypes', {
+      get: () => fakeMimeTypes,
     });
 
-    // window.chrome
-    window.chrome = {
-      runtime: {},
-      // Можешь добавить другие свойства если нужно
+    // canvas spoof
+    const getFakeCanvas = () => 'data:image/png;base64,fakeimgstring';
+    const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+    HTMLCanvasElement.prototype.toDataURL = function () {
+      return getFakeCanvas();
     };
 
-    // navigator.permissions
-    const originalQuery = window.navigator.permissions.query;
-    window.navigator.permissions.query = (parameters) =>
-      parameters.name === 'notifications'
-        ? Promise.resolve({ state: Notification.permission })
-        : originalQuery(parameters);
+    // WebGL vendor/renderer
+    const getParameter = WebGLRenderingContext.prototype.getParameter;
+    WebGLRenderingContext.prototype.getParameter = function (parameter) {
+      if (parameter === 37445) return 'Intel Inc.';
+      if (parameter === 37446) return 'Intel Iris OpenGL Engine';
+      return getParameter.call(this, parameter);
+    };
 
-    // navigator.languages
-    Object.defineProperty(navigator, 'languages', {
-      get: () => ['en-US', 'en'],
-    });
+    // AudioContext fingerprint
+    const copy = AudioBuffer.prototype.getChannelData;
+    AudioBuffer.prototype.getChannelData = function () {
+      const results = copy.apply(this, arguments);
+      for (let i = 0; i < results.length; i += 100) {
+        results[i] = results[i] + Math.random() * 0.0000001;
+      }
+      return results;
+    };
+
+    // удаление window.cdc_*
+    for (let key in window) {
+      if (key.match(/^\$?cdc_/) || key === '__webdriver_evaluate') {
+        delete window[key];
+      }
+    }
+
+    // eval защита
+    const originalEval = window.eval;
+    window.eval = function () {
+      if (arguments[0].toString().includes('webdriver')) {
+        return null;
+      }
+      return originalEval(...arguments);
+    };
+
+    // Function защита
+    const originalFunction = Function.prototype.toString;
+    Function.prototype.toString = function () {
+      if (this.toString().includes('[native code]')) {
+        return 'function () { [native code] }';
+      }
+      return originalFunction.apply(this, arguments);
+    };
   });
 
   await page.goto('https://bot.sannysoft.com/');
@@ -231,3 +284,11 @@ app.get('/start', async (req, res) => {
 
   
 app.listen('3000', err => { err ? err : console.log('STARTD SERVER') });
+
+
+
+
+
+
+
+
