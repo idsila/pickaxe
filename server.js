@@ -237,7 +237,7 @@ async function start(){
     const cords = { x: device.width - 302 + (Math.floor(Math.random() * 128)), y: device.height - 89 + (Math.floor(Math.random() * 36)) }
     await page.mouse.click(cords.x, cords.y);
     await page.mouse.wheel({ deltaY: -(Math.floor(Math.random() * 3000)) });
-  }, 100+ Math.floor(Math.random() * 400) );
+  }, 50+ Math.floor(Math.random() * 100) );
 
 
   setInterval(async () => {
