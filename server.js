@@ -10,109 +10,51 @@ app.use(cors({methods:['GET','POST']}));
 app.use(express.json());    
 app.use(express.static('public'));  
 
+
 const gadgets = [
-  {
-    height: 800,
-    width: 1280,
-    agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-  },
-  {
-    height: 900,
-    width: 1440,
-    agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-  },
-  {
-    height: 1080,
-    width: 1920,
-    agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0'
-  },
-  {
-    height: 720,
-    width: 1280,
-    agent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-  },
-  {
-    height: 1600,
-    width: 2560,
-    agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'
-  },
-  // Мобильные устройства
-  {
-    height: 844,
-    width: 390,
-    agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 926,
-    width: 428,
-    agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 1366,
-    width: 1024,
-    agent: 'Mozilla/5.0 (iPad; CPU OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 1180,
-    width: 820,
-    agent: 'Mozilla/5.0 (iPad; CPU OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 1480,
-    width: 720,
-    agent: 'Mozilla/5.0 (Linux; Android 13; SM-S901B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  },
-  {
-    height: 1600,
-    width: 720,
-    agent: 'Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  },
-  {
-    height: 2400,
-    width: 1080,
-    agent: 'Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  },
-  {
-    height: 1080,
-    width: 412,
-    agent: 'Mozilla/5.0 (Linux; Android 13; Pixel 6a) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  },
-  {
-    height: 1080,
-    width: 393,
-    agent: 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  },
-  {
-    height: 1284,
-    width: 2778,
-    agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 1170,
-    width: 2532,
-    agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 1344,
-    width: 896,
-    agent: 'Mozilla/5.0 (iPad; CPU OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1'
-  },
-  {
-    height: 1620,
-    width: 1080,
-    agent: 'Mozilla/5.0 (Linux; Android 13; SM-T870) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-  },
-  {
-    height: 2560,
-    width: 1440,
-    agent: 'Mozilla/5.0 (Linux; Android 13; SM-G986B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  },
-  {
-    height: 3040,
-    width: 1440,
-    agent: 'Mozilla/5.0 (Linux; Android 13; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-  }
+  // Windows
+  { width: 1920, height: 1080, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' },
+  { width: 1366, height: 768, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' },
+  { width: 1536, height: 864, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36' },
+  { width: 1600, height: 900, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36' },
+  { width: 1440, height: 900, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36' },
+  { width: 1680, height: 1050, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36' },
+  { width: 1280, height: 720, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36' },
+  { width: 1920, height: 1200, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36' },
+  { width: 2560, height: 1440, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36' },
+  { width: 1024, height: 768, agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36' },
+
+  // Android
+  { width: 412, height: 915, agent: 'Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36' },
+  { width: 393, height: 873, agent: 'Mozilla/5.0 (Linux; Android 13; Galaxy S22) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36' },
+  { width: 360, height: 780, agent: 'Mozilla/5.0 (Linux; Android 10; Redmi Note 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36' },
+  { width: 384, height: 854, agent: 'Mozilla/5.0 (Linux; Android 8.1; Nokia 3.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Mobile Safari/537.36' },
+  { width: 411, height: 823, agent: 'Mozilla/5.0 (Linux; Android 10; Moto G7 Plus) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36' },
+  { width: 412, height: 869, agent: 'Mozilla/5.0 (Linux; Android 12; Samsung Galaxy S21) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36' },
+  { width: 360, height: 800, agent: 'Mozilla/5.0 (Linux; Android 9; Huawei P30 Lite) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36' },
+  { width: 428, height: 926, agent: 'Mozilla/5.0 (Linux; Android 13; OnePlus 11) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36' },
+
+  // iPhone
+  { width: 390, height: 844, agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile Safari/604.1' },
+  { width: 430, height: 932, agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1' },
+  { width: 375, height: 812, agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile Safari/604.1' },
+  { width: 375, height: 667, agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_1_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile Safari/604.1' },
+  { width: 428, height: 926, agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile Safari/604.1' },
+  { width: 390, height: 844, agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile Safari/604.1' },
+
+  // macOS
+  { width: 1440, height: 900, agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 12_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Safari/605.1.15' },
+  { width: 2560, height: 1600, agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15' },
+  { width: 1680, height: 1050, agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15' },
+
+  // iPad
+  { width: 768, height: 1024, agent: 'Mozilla/5.0 (iPad; CPU OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile Safari/604.1' },
+  { width: 1024, height: 1366, agent: 'Mozilla/5.0 (iPad; CPU OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile Safari/604.1' },
+
+  // Linux
+  { width: 1366, height: 768, agent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36' }
 ];
+
 
 
 const delay = ms => new Promise(r => setTimeout(r,ms*1000));
@@ -120,7 +62,8 @@ const delay = ms => new Promise(r => setTimeout(r,ms*1000));
 
 async function start(){
   console.log('STARTED BOT');
-  const myDevice = gadgets[Math.floor(Math.random()*gadgets.length)];
+  const device = gadgets[Math.floor(Math.random()*gadgets.length)];
+  console.log(device);
   const browser = await puppeteer.launch({ headless: true,  args: [
     '--enable-notifications',
     '--no-sandbox',
@@ -139,17 +82,16 @@ async function start(){
   browser.on('targetcreated', async (target) => {
     if (target.type() === 'page') {
       const newPage = await target.page();
-      await page.setUserAgent(myDevice.agent);
-      await newPage.setUserAgent(myDevice.agent);
-      await newPage.setViewport({ width: 500, height: 500 });
-      await page.setViewport({ width: 500, height: 500, deviceScaleFactor: 1 });
+      await page.setUserAgent(device.agent);
+      await newPage.setUserAgent(device.agent);
+      await newPage.setViewport({ width: device.width, height: device.height });
+      await page.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 1 });
       console.log('New page opened, user-agent set.');
     }
   });
 
-  await page.setUserAgent(myDevice.agent);
-  //await page.setViewport({ width: myDevice.width, height: myDevice.height});
-  await page.setViewport({ width: 500, height: 500, deviceScaleFactor: 1 });
+  await page.setUserAgent(device.agent);
+  await page.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 1 });
   
   await page.evaluateOnNewDocument(() => {
     // navigator.webdriver
@@ -272,21 +214,58 @@ async function start(){
   });
 
   await page.goto('https://best-earn.vercel.app/');
-  delay(6);
-  setInterval(async () => {
-     //const wclick = myDevice.width-(326+Math.ceil(Math.random()*125))
-     //const hclick = myDevice.height-(445+Math.ceil(Math.random()*33));
-     //console.log(hclick, wclick)
-     //await page.mouse.click(236, 589);
-     await page.screenshot({ path: "public/img.png" })
-  }, 500)
+  await delay(2);
+  await page.evaluate(() => {
+    function emulateClick(x, y){
+      const id = new Date().getTime();
+      const div = document.createElement('div');
+      div.style.border = '1px solid red';
+      div.style.position = 'absolute';
+      div.style.zIndex = '99999999999999999999999999';
+      div.className = `id_${id}`;
+      div.style.top = `${y}px`;
+      div.style.left = `${x}px`;
+      document.body.appendChild(div);
+      setTimeout(() => {
+        document.querySelector(`.id_${id}`).remove();
+      },5000);
+    }
+    
+    document.body.addEventListener('click', e => { 
+      emulateClick(e.clientX, e.clientY);
+    })
+  });
+
+
   
-  console.log(myDevice);
+  await page.mouse.wheel({ deltaY: 2500 });
+  await delay(2);
+  setInterval(async () => {
+    setTimeout( async () => {
+      const cords = { x: device.width - 302 + (Math.floor(Math.random() * 128)), y: device.height - 89 + (Math.floor(Math.random() * 36)) }
+       await page.mouse.click(cords.x, cords.y);
+       await page.mouse.wheel({ deltaY: -(Math.floor(Math.random() * 3000)) });
+    }, (Math.floor(Math.random() * 400)));
+  }, 100);
+
+
+  setInterval(async () => {
+    setTimeout( async () => {
+      await page.mouse.click( Math.ceil(Math.random()*device.width), Math.ceil(Math.random()*device.height));
+      await page.screenshot({ path: "public/img.png" })
+    },Math.floor(Math.random() * 2000));
+  }, 3425);
+
+  setInterval(async () => {
+    setTimeout( async () => {
+       await page.mouse.wheel({ deltaY: (Math.floor(Math.random() * 3000)) });
+    },Math.floor(Math.random() * 3000));
+  }, 15324);
+ 
+  
   console.log('FINISH')
 }
 
-
-console.log('http://localhost:3000/start')
 
 
 
