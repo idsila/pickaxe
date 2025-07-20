@@ -302,7 +302,7 @@ async function start(){
   console.log('STARTED BOT');
   const device = gadgets[Math.floor(Math.random()*gadgets.length)];
   console.log(device);
-  const browser = await puppeteer.launch({ headless: true,  args: [
+  const browser = await puppeteer.launch({ headless: false,  args: [
     '--enable-notifications',
     '--no-sandbox',
     '--disable-setuid-sandbox',
@@ -451,7 +451,7 @@ async function start(){
     };
   });
 
-  await page.goto('https://best-earn.vercel.app/');
+  await page.goto('https://exe.io/slut-only');
   await delay(2);
   await page.mouse.wheel({ deltaY: 2500 });
   await delay(2);
@@ -477,6 +477,7 @@ async function start(){
 }
 
 
+start()
 
 
 app.get('/start', async (req, res) => {
