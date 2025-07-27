@@ -191,6 +191,8 @@ const gadgets = [
     languages: ["ru-RU", "ru", "en-US"],
     deviceMemory: 8,
     hardwareConcurrency: 4,
+    width: 1920,
+    height: 1080,
     webGL: {
       renderer: "NVIDIA GeForce RTX 3080",
       vendor: "NVIDIA Corporation"
@@ -204,6 +206,8 @@ const gadgets = [
     languages: ["ru-RU", "ru", "en"],
     deviceMemory: 16,
     hardwareConcurrency: 8,
+    width: 2560,
+    height: 1600,
     webGL: {
       renderer: "Apple M2",
       vendor: "Apple Inc."
@@ -217,6 +221,8 @@ const gadgets = [
     languages: ["ru", "en-US"],
     deviceMemory: 4,
     hardwareConcurrency: 4,
+    width: 1366,
+    height: 768,
     webGL: {
       renderer: "Intel HD Graphics 620",
       vendor: "Intel Inc."
@@ -230,6 +236,8 @@ const gadgets = [
     languages: ["ru-RU", "en-US"],
     deviceMemory: 4,
     hardwareConcurrency: 6,
+    width: 1170,
+    height: 2532,
     webGL: {
       renderer: "Apple A17 GPU",
       vendor: "Apple Inc."
@@ -243,6 +251,8 @@ const gadgets = [
     languages: ["ru", "en-US"],
     deviceMemory: 8,
     hardwareConcurrency: 8,
+    width: 1920,
+    height: 1080,
     webGL: {
       renderer: "AMD Radeon RX 580 Series",
       vendor: "ATI Technologies Inc."
@@ -256,6 +266,8 @@ const gadgets = [
     languages: ["ru", "en-US"],
     deviceMemory: 6,
     hardwareConcurrency: 6,
+    width: 2048,
+    height: 2732,
     webGL: {
       renderer: "Apple A14X GPU",
       vendor: "Apple Inc."
@@ -269,6 +281,8 @@ const gadgets = [
     languages: ["ru-RU", "en"],
     deviceMemory: 8,
     hardwareConcurrency: 4,
+    width: 1920,
+    height: 1080,
     webGL: {
       renderer: "Qualcomm Adreno 690",
       vendor: "Qualcomm"
@@ -282,6 +296,8 @@ const gadgets = [
     languages: ["ru", "en-US"],
     deviceMemory: 8,
     hardwareConcurrency: 8,
+    width: 1680,
+    height: 1050,
     webGL: {
       renderer: "Intel Iris Plus Graphics 640",
       vendor: "Intel Inc."
@@ -295,6 +311,8 @@ const gadgets = [
     languages: ["ru", "en-US"],
     deviceMemory: 16,
     hardwareConcurrency: 8,
+    width: 2560,
+    height: 1440,
     webGL: {
       renderer: "NVIDIA GeForce GTX 1660 Ti",
       vendor: "NVIDIA Corporation"
@@ -308,62 +326,11 @@ const gadgets = [
     languages: ["ru", "en-US"],
     deviceMemory: 6,
     hardwareConcurrency: 8,
+    width: 1080,
+    height: 2400,
     webGL: {
       renderer: "Mali-G77 MP11",
       vendor: "ARM"
-    }
-  },
-  // 40 устройств продолжаются по аналогии...
-  {
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/118.0.2088.76 Safari/537.36",
-    platform: "Win32",
-    vendor: "Google Inc.",
-    language: "ru",
-    languages: ["ru", "en-US"],
-    deviceMemory: 4,
-    hardwareConcurrency: 4,
-    webGL: {
-      renderer: "Intel UHD Graphics 630",
-      vendor: "Intel Inc."
-    }
-  },
-  {
-    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_7_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15",
-    platform: "MacIntel",
-    vendor: "Apple Computer, Inc.",
-    language: "ru-RU",
-    languages: ["ru-RU", "en"],
-    deviceMemory: 8,
-    hardwareConcurrency: 4,
-    webGL: {
-      renderer: "AMD Radeon Pro 555",
-      vendor: "ATI Technologies Inc."
-    }
-  },
-  {
-    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1",
-    platform: "iPhone",
-    vendor: "Apple Computer, Inc.",
-    language: "ru",
-    languages: ["ru", "en"],
-    deviceMemory: 4,
-    hardwareConcurrency: 6,
-    webGL: {
-      renderer: "Apple A16 GPU",
-      vendor: "Apple Inc."
-    }
-  },
-  {
-    userAgent: "Mozilla/5.0 (Android 13; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.91 Mobile Safari/537.36",
-    platform: "Android",
-    vendor: "Google Inc.",
-    language: "ru-RU",
-    languages: ["ru-RU", "en-US"],
-    deviceMemory: 8,
-    hardwareConcurrency: 8,
-    webGL: {
-      renderer: "Adreno 740",
-      vendor: "Qualcomm"
     }
   }
 ];
@@ -383,3 +350,64 @@ const gadgets = [
 // }
 
 // console.log('Current WebGL info:', checkWebGL());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+
+  // 1. Устанавливаем User-Agent до навигации
+  await page.setUserAgent(device.userAgent);
+
+  // 2. Подменяем navigator и другие свойства через evaluateOnNewDocument
+  await page.evaluateOnNewDocument((profile) => {
+    // Основные свойства navigator
+    Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
+    Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
+    Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
+
+    // WebGL подмена
+    const originalGetParameter = WebGLRenderingContext.prototype.getParameter;
+    WebGLRenderingContext.prototype.getParameter = function(parameter) {
+      if (parameter === 37445) return profile.webGL.vendor; // UNMASKED_VENDOR_WEBGL
+      if (parameter === 37446) return profile.webGL.renderer; // UNMASKED_RENDERER_WEBGL
+      return originalGetParameter.call(this, parameter);
+    };
+
+    // Разрешение экрана
+    Object.defineProperty(screen, 'width', { get: () => profile.screen.width });
+    Object.defineProperty(screen, 'height', { get: () => profile.screen.height });
+  }, device);
+
+  // 3. Дополнительные заголовки
+  await page.setExtraHTTPHeaders({'Accept-Language': 'en-US,en;q=0.9'});
+
+  // 4. Устанавливаем viewport (должен соответствовать screen)
+  await page.setViewport({
+    width: DEVICE_PROFILE.screen.width,
+    height: DEVICE_PROFILE.screen.height,
+    deviceScaleFactor: 1
+  });
+
+  // 5. Переходим на страницу
+  await page.goto('https://example.com', { waitUntil: 'networkidle2' });
+
+
+
+
+
+
+  await browser.close();
+})();

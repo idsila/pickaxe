@@ -11,563 +11,155 @@ app.use(express.static("public"));
 
 const gadgets = [
   {
-    width: 1536,
-    height: 864,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119) Gecko/20100101 Firefox/119",
-  },
-  {
-    width: 1600,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:116) Gecko/20100101 Firefox/116",
-  },
-  {
-    width: 2560,
-    height: 1440,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Safari/537.36",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118) Gecko/20100101 Firefox/118",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36",
-  },
-  {
-    width: 1280,
-    height: 800,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127 Safari/537.36",
-  },
-  {
-    width: 1024,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:115) Gecko/20100101 Firefox/115",
-  },
-  {
-    width: 1600,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121 Safari/537.36",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115 Safari/537.36",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119 Safari/537.36",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121) Gecko/20100101 Firefox/121",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:115) Gecko/20100101 Firefox/115",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119) Gecko/20100101 Firefox/119",
-  },
-  {
-    width: 1440,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118) Gecko/20100101 Firefox/118",
-  },
-  {
-    width: 2560,
-    height: 1440,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118) Gecko/20100101 Firefox/118",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118) Gecko/20100101 Firefox/118",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Safari/537.36",
-  },
-  {
-    width: 1536,
-    height: 864,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125) Gecko/20100101 Firefox/125",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123) Gecko/20100101 Firefox/123",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36",
-  },
-  {
-    width: 1536,
-    height: 864,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120) Gecko/20100101 Firefox/120",
-  },
-  {
-    width: 2560,
-    height: 1440,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118) Gecko/20100101 Firefox/118",
-  },
-  {
-    width: 1280,
-    height: 800,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116 Safari/537.36",
-  },
-  {
-    width: 1440,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36",
-  },
-  {
-    width: 2560,
-    height: 1440,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127 Safari/537.36",
-  },
-  {
-    width: 1366,
-    height: 768,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118) Gecko/20100101 Firefox/118",
-  },
-  {
-    width: 1536,
-    height: 864,
-    agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 873,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Mobile Safari/537.36",
-  },
-  {
-    width: 412,
-    height: 869,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121 Mobile Safari/537.36",
-  },
-  {
-    width: 385,
-    height: 854,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119 Mobile Safari/537.36",
-  },
-  {
-    width: 412,
-    height: 915,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116 Mobile Safari/537.36",
-  },
-  {
-    width: 412,
-    height: 869,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115 Mobile Safari/537.36",
-  },
-  {
-    width: 412,
-    height: 869,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Mobile Safari/537.36",
-  },
-  {
-    width: 412,
-    height: 915,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 851,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Mobile Safari/537.36",
-  },
-  {
-    width: 385,
-    height: 854,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Mobile Safari/537.36",
-  },
-  {
-    width: 360,
-    height: 760,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119 Mobile Safari/537.36",
-  },
-  {
-    width: 384,
-    height: 854,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 873,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 873,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116 Mobile Safari/537.36",
-  },
-  {
-    width: 385,
-    height: 854,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Mobile Safari/537.36",
-  },
-  {
-    width: 384,
-    height: 854,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 851,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Mobile Safari/537.36",
-  },
-  {
-    width: 360,
-    height: 780,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127 Mobile Safari/537.36",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116 Mobile Safari/537.36",
-  },
-  {
-    width: 412,
-    height: 915,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Mobile Safari/537.36",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 873,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Mobile Safari/537.36",
-  },
-  {
-    width: 360,
-    height: 780,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 851,
-    agent:
-      "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127 Mobile Safari/537.36",
-  },
-  {
-    width: 360,
-    height: 800,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115 Mobile Safari/537.36",
-  },
-  {
-    width: 393,
-    height: 851,
-    agent:
-      "Mozilla/5.0 (Linux; Android 12; SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36",
-  },
-  {
-    width: 375,
-    height: 812,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 375,
-    height: 812,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 414,
-    height: 736,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 375,
-    height: 667,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 414,
-    height: 736,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 428,
-    height: 926,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 428,
-    height: 926,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 375,
-    height: 667,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 414,
-    height: 896,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 414,
-    height: 896,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 375,
-    height: 667,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 414,
-    height: 896,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 390,
-    height: 844,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 414,
-    height: 736,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 428,
-    height: 926,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 375,
-    height: 812,
-    agent:
-      "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
-    width: 1440,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
-    width: 2304,
-    height: 1440,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0",
+    platform: "Win32",
+    vendor: "Mozilla",
+    language: "ru-RU",
+    languages: ["ru-RU", "ru", "en-US"],
+    deviceMemory: 8,
+    hardwareConcurrency: 4,
     width: 1920,
-    height: 1200,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+    height: 1080,
+    webGL: {
+      renderer: "NVIDIA GeForce RTX 3080",
+      vendor: "NVIDIA Corporation"
+    }
   },
   {
-    width: 1440,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
+    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15",
+    platform: "MacIntel",
+    vendor: "Apple Computer, Inc.",
+    language: "ru-RU",
+    languages: ["ru-RU", "ru", "en"],
+    deviceMemory: 16,
+    hardwareConcurrency: 8,
     width: 2560,
     height: 1600,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+    webGL: {
+      renderer: "Apple M2",
+      vendor: "Apple Inc."
+    }
   },
   {
-    width: 2304,
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:115.0) Gecko/20100101 Firefox/115.0",
+    platform: "Win32",
+    vendor: "Mozilla",
+    language: "ru",
+    languages: ["ru", "en-US"],
+    deviceMemory: 4,
+    hardwareConcurrency: 4,
+    width: 1366,
+    height: 768,
+    webGL: {
+      renderer: "Intel HD Graphics 620",
+      vendor: "Intel Inc."
+    }
+  },
+  {
+    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    platform: "iPhone",
+    vendor: "Apple Computer, Inc.",
+    language: "ru-RU",
+    languages: ["ru-RU", "en-US"],
+    deviceMemory: 4,
+    hardwareConcurrency: 6,
+    width: 1170,
+    height: 2532,
+    webGL: {
+      renderer: "Apple A17 GPU",
+      vendor: "Apple Inc."
+    }
+  },
+  {
+    userAgent: "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.92 Safari/537.36",
+    platform: "Win32",
+    vendor: "Google Inc.",
+    language: "ru",
+    languages: ["ru", "en-US"],
+    deviceMemory: 8,
+    hardwareConcurrency: 8,
+    width: 1920,
+    height: 1080,
+    webGL: {
+      renderer: "AMD Radeon RX 580 Series",
+      vendor: "ATI Technologies Inc."
+    }
+  },
+  {
+    userAgent: "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    platform: "iPad",
+    vendor: "Apple Computer, Inc.",
+    language: "ru",
+    languages: ["ru", "en-US"],
+    deviceMemory: 6,
+    hardwareConcurrency: 6,
+    width: 2048,
+    height: 2732,
+    webGL: {
+      renderer: "Apple A14X GPU",
+      vendor: "Apple Inc."
+    }
+  },
+  {
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; ARM64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.129 Safari/537.36",
+    platform: "Win32",
+    vendor: "Google Inc.",
+    language: "ru-RU",
+    languages: ["ru-RU", "en"],
+    deviceMemory: 8,
+    hardwareConcurrency: 4,
+    width: 1920,
+    height: 1080,
+    webGL: {
+      renderer: "Qualcomm Adreno 690",
+      vendor: "Qualcomm"
+    }
+  },
+  {
+    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_6_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15",
+    platform: "MacIntel",
+    vendor: "Apple Computer, Inc.",
+    language: "ru",
+    languages: ["ru", "en-US"],
+    deviceMemory: 8,
+    hardwareConcurrency: 8,
+    width: 1680,
+    height: 1050,
+    webGL: {
+      renderer: "Intel Iris Plus Graphics 640",
+      vendor: "Intel Inc."
+    }
+  },
+  {
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:113.0) Gecko/20100101 Firefox/113.0",
+    platform: "Win32",
+    vendor: "Mozilla",
+    language: "ru",
+    languages: ["ru", "en-US"],
+    deviceMemory: 16,
+    hardwareConcurrency: 8,
+    width: 2560,
     height: 1440,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+    webGL: {
+      renderer: "NVIDIA GeForce GTX 1660 Ti",
+      vendor: "NVIDIA Corporation"
+    }
   },
   {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
-    width: 1440,
-    height: 900,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
-    width: 1680,
-    height: 1050,
-    agent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-  },
-  {
-    width: 810,
-    height: 1080,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 810,
-    height: 1080,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 768,
-    height: 1024,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 768,
-    height: 1024,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 768,
-    height: 1024,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 834,
-    height: 1112,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 834,
-    height: 1112,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
-  {
-    width: 768,
-    height: 1024,
-    agent:
-      "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile Safari/604.1",
-  },
+    userAgent: "Mozilla/5.0 (Android 14; Mobile; rv:120.0) Gecko/120.0 Firefox/120.0",
+    platform: "Android",
+    vendor: "Mozilla",
+    language: "ru",
+    languages: ["ru", "en-US"],
+    deviceMemory: 6,
+    hardwareConcurrency: 8,
+    width: 1080,
+    height: 2400,
+    webGL: {
+      renderer: "Mali-G77 MP11",
+      vendor: "ARM"
+    }
+  }
 ];
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms * 1000));
@@ -597,8 +189,45 @@ async function start() {
   browser.on("targetcreated", async (target) => {
     if (target.type() === "page") {
       const newPage = await target.page();
-      await page.setUserAgent(device.agent);
-      await newPage.setUserAgent(device.agent);
+      await page.setUserAgent(device.userAgent);
+      await newPage.setUserAgent(device.userAgent);
+      await page.evaluateOnNewDocument((profile) => {
+        // Основные свойства navigator
+        Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
+        Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
+        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
+    
+        // WebGL подмена
+        const originalGetParameter = WebGLRenderingContext.prototype.getParameter;
+        WebGLRenderingContext.prototype.getParameter = function(parameter) {
+          if (parameter === 37445) return profile.webGL.vendor; // UNMASKED_VENDOR_WEBGL
+          if (parameter === 37446) return profile.webGL.renderer; // UNMASKED_RENDERER_WEBGL
+          return originalGetParameter.call(this, parameter);
+        };
+    
+        // Разрешение экрана
+        Object.defineProperty(screen, 'width', { get: () => profile.width });
+        Object.defineProperty(screen, 'height', { get: () => profile.height });
+      }, device);
+
+      await newPage.evaluateOnNewDocument((profile) => {
+        // Основные свойства navigator
+        Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
+        Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
+        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
+    
+        // WebGL подмена
+        const originalGetParameter = WebGLRenderingContext.prototype.getParameter;
+        WebGLRenderingContext.prototype.getParameter = function(parameter) {
+          if (parameter === 37445) return profile.webGL.vendor; // UNMASKED_VENDOR_WEBGL
+          if (parameter === 37446) return profile.webGL.renderer; // UNMASKED_RENDERER_WEBGL
+          return originalGetParameter.call(this, parameter);
+        };
+    
+        // Разрешение экрана
+        Object.defineProperty(screen, 'width', { get: () => profile.width });
+        Object.defineProperty(screen, 'height', { get: () => profile.height });
+      }, device);
       await newPage.setViewport({ width: device.width, height: device.height });
       await page.setViewport({
         width: device.width,
@@ -609,12 +238,27 @@ async function start() {
     }
   });
 
-  await page.setUserAgent(device.agent);
-  await page.setViewport({
-    width: device.width,
-    height: device.height,
-    deviceScaleFactor: 1,
-  });
+  await page.setUserAgent(device.userAgent);
+  await page.evaluateOnNewDocument((profile) => {
+    // Основные свойства navigator
+    Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
+    Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
+    Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
+
+    // WebGL подмена
+    const originalGetParameter = WebGLRenderingContext.prototype.getParameter;
+    WebGLRenderingContext.prototype.getParameter = function(parameter) {
+      if (parameter === 37445) return profile.webGL.vendor; // UNMASKED_VENDOR_WEBGL
+      if (parameter === 37446) return profile.webGL.renderer; // UNMASKED_RENDERER_WEBGL
+      return originalGetParameter.call(this, parameter);
+    };
+
+    // Разрешение экрана
+    Object.defineProperty(screen, 'width', { get: () => profile.width });
+    Object.defineProperty(screen, 'height', { get: () => profile.height });
+  }, device);
+  await page.setExtraHTTPHeaders({'Accept-Language': 'en-US,en;q=0.9'});
+  await page.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 1 });
 
   await page.evaluateOnNewDocument(() => {
     // navigator.webdriver
@@ -736,7 +380,11 @@ async function start() {
     };
   });
 
-  await page.goto("https://idsila.vercel.app/");
+
+
+
+
+  await page.goto("https://idsila.vercel.app/", { waitUntil: 'networkidle2' });
   await delay(2);
   //await page.mouse.wheel({ deltaY: 2500 });
   await delay(2);
