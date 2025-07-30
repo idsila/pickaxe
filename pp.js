@@ -16,15 +16,6 @@ function getDeviceInfo() {
     
 
     
-    // Браузер
-    browser: {
-      name: getBrowserName(),
-      version: getBrowserVersion(),
-    },
-    
-    // ОС
-    os: getOS(),
-    
     // Сеть
     connection: navigator.connection ? {
       type: navigator.connection.type,
@@ -40,21 +31,11 @@ function getDeviceInfo() {
     touchSupport: 'ontouchstart' in window,
     batteryApi: 'getBattery' in navigator,
     vibrationApi: 'vibrate' in navigator,
-    webGL: getWebGLInfo()
   };
 
   return info;
 }
 
-
-
-
-
-
-
-// Информация о GPU
-
-// Пример использования
 console.log(getDeviceInfo());
 
 
