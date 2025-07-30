@@ -1969,7 +1969,7 @@ async function start() {
   const device = gadgets[Math.floor(Math.random() * gadgets.length)];
   console.log(device);
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: [
       "--enable-notifications",
       "--no-sandbox",
