@@ -9,299 +9,827 @@ app.use(cors({ methods: ["GET", "POST"] }));
 app.use(express.json());
 app.use(express.static("public"));
 
-const gadgets =  [
+const gadgets = [
   {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
     "platform": "Android",
     "vendor": "Google Inc.",
     "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
       "en-US",
       "en"
     ],
-    "deviceMemory": 12,
+    "deviceMemory": 6,
     "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
+    "width": 1080,
+    "height": 2400,
     "webGL": {
-      "renderer": "Adreno 750",
+      "renderer": "Adreno 610",
       "vendor": "Qualcomm"
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Android",
+        "platformVersion": "12.0.0",
+        "architecture": "arm",
+        "model": "Xiaomi Redmi Note 11",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 619",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Android",
+        "platformVersion": "10.0.0",
+        "architecture": "arm",
+        "model": "OnePlus Nord N200",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 2256,
+    "height": 1504,
+    "webGL": {
+      "renderer": "Intel Iris Xe",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "10.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "NVIDIA GeForce MX330",
+      "vendor": "NVIDIA Corporation"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1366,
+    "height": 768,
+    "webGL": {
+      "renderer": "Intel UHD Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "Motorola Moto G Power",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Android",
+        "platformVersion": "10.0.0",
+        "architecture": "arm",
+        "model": "Motorola Moto G Power",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "Xiaomi Redmi Note 11",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Android",
+        "platformVersion": "12.0.0",
+        "architecture": "arm",
+        "model": "Xiaomi Redmi Note 11",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Android",
+        "platformVersion": "10.0.0",
+        "architecture": "arm",
+        "model": "Motorola Moto G Power",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1366,
+    "height": 768,
+    "webGL": {
+      "renderer": "Intel UHD Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1366,
+    "height": 768,
+    "webGL": {
+      "renderer": "Intel UHD Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1366,
+    "height": 768,
+    "webGL": {
+      "renderer": "Intel UHD Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2340,
+    "webGL": {
+      "renderer": "Mali-G68",
+      "vendor": "ARM"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "Samsung Galaxy A54",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Android",
+        "platformVersion": "10.0.0",
+        "architecture": "arm",
+        "model": "Motorola Moto G Power",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 619",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "OnePlus Nord N200",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "NVIDIA GeForce MX330",
+      "vendor": "NVIDIA Corporation"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "14.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Mali-G78",
+      "vendor": "ARM"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
@@ -316,45 +844,48 @@ const gadgets =  [
         "fullVersion": "134.0.0.0",
         "platform": "Android",
         "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
+        "architecture": "arm",
+        "model": "Google Pixel 6a",
         "mobile": true
       }
     }
   },
   {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
-      "en-US",
+      "ru-RU",
       "en"
     ],
     "deviceMemory": 16,
     "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
+    "width": 2256,
+    "height": 1504,
     "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
+      "renderer": "Intel Iris Xe",
+      "vendor": "Intel Inc."
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
             "brand": "Chromium",
-            "version": "16"
+            "version": "138"
           },
           {
-            "brand": "Safari",
-            "version": "16"
+            "brand": "Google Chrome",
+            "version": "138"
           }
         ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
+        "fullVersion": "138.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "11.0.0",
         "architecture": "x86",
         "model": "",
         "mobile": false
@@ -362,141 +893,741 @@ const gadgets =  [
     }
   },
   {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Win32",
     "vendor": "Google Inc.",
     "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
       "en-US",
       "en"
     ],
-    "deviceMemory": 12,
+    "deviceMemory": 16,
     "hardwareConcurrency": 8,
-    "width": 1344,
-    "height": 2992,
+    "width": 2256,
+    "height": 1504,
     "webGL": {
-      "renderer": "Immortalis-G715",
+      "renderer": "Intel Iris Xe",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "11.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "AMD Radeon Vega 8",
+      "vendor": "ATI Technologies Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "AMD Radeon Vega 8",
+      "vendor": "ATI Technologies Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 2256,
+    "height": 1504,
+    "webGL": {
+      "renderer": "Intel Iris Xe",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "10.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2340,
+    "webGL": {
+      "renderer": "Mali-G68",
       "vendor": "ARM"
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Android",
+        "platformVersion": "11.0.0",
+        "architecture": "arm",
+        "model": "Samsung Galaxy A54",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "11.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "AMD Radeon Vega 8",
+      "vendor": "ATI Technologies Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "10.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "10.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2340,
+    "webGL": {
+      "renderer": "Mali-G68",
+      "vendor": "ARM"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Android",
+        "platformVersion": "10.0.0",
+        "architecture": "arm",
+        "model": "Samsung Galaxy A54",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "NVIDIA GeForce MX330",
+      "vendor": "NVIDIA Corporation"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "11.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "NVIDIA GeForce MX330",
+      "vendor": "NVIDIA Corporation"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "14.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 619",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Android",
+        "platformVersion": "12.0.0",
+        "architecture": "arm",
+        "model": "OnePlus Nord N200",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Mali-G78",
+      "vendor": "ARM"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "Google Pixel 6a",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "NVIDIA GeForce MX330",
+      "vendor": "NVIDIA Corporation"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "12.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 619",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
@@ -511,31 +1642,118 @@ const gadgets =  [
         "fullVersion": "135.0.0.0",
         "platform": "Android",
         "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Google Pixel 8 Pro",
+        "architecture": "arm",
+        "model": "OnePlus Nord N200",
         "mobile": true
       }
     }
   },
   {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 16,
+    "hardwareConcurrency": 8,
+    "width": 2256,
+    "height": 1504,
+    "webGL": {
+      "renderer": "Intel Iris Xe",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
     "platform": "Win32",
     "vendor": "Google Inc.",
     "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
       "en-US",
       "en"
     ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
     "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
+      "renderer": "AMD Radeon Vega 8",
+      "vendor": "ATI Technologies Inc."
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "11.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en-US",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en-US",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
@@ -549,7 +1767,7 @@ const gadgets =  [
         ],
         "fullVersion": "136.0.0.0",
         "platform": "Win32",
-        "platformVersion": "14.0.0",
+        "platformVersion": "12.0.0",
         "architecture": "x86",
         "model": "",
         "mobile": false
@@ -557,375 +1775,237 @@ const gadgets =  [
     }
   },
   {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
-      "en-US",
+      "ru-RU",
       "en"
     ],
     "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
     "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
+    "width": 1080,
+    "height": 2400,
     "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1344,
-    "height": 2992,
-    "webGL": {
-      "renderer": "Immortalis-G715",
+      "renderer": "Mali-G78",
       "vendor": "ARM"
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "137"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "137"
+          }
+        ],
+        "fullVersion": "137.0.0.0",
+        "platform": "Android",
+        "platformVersion": "12.0.0",
+        "architecture": "arm",
+        "model": "Google Pixel 6a",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1920,
+    "height": 1080,
+    "webGL": {
+      "renderer": "Intel Iris Xe Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "134"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "134"
+          }
+        ],
+        "fullVersion": "134.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "14.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "width": 1366,
+    "height": 768,
+    "webGL": {
+      "renderer": "Intel UHD Graphics",
+      "vendor": "Intel Inc."
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Win32 NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "138"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "138"
+          }
+        ],
+        "fullVersion": "138.0.0.0",
+        "platform": "Win32",
+        "platformVersion": "13.0.0",
+        "architecture": "x86",
+        "model": "",
+        "mobile": false
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "en",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Mali-G78",
+      "vendor": "ARM"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "135"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "135"
+          }
+        ],
+        "fullVersion": "135.0.0.0",
+        "platform": "Android",
+        "platformVersion": "12.0.0",
+        "architecture": "arm",
+        "model": "Google Pixel 6a",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
+    "webGL": {
+      "renderer": "Adreno 610",
+      "vendor": "Qualcomm"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgentMetadata": {
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "136"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "136"
+          }
+        ],
+        "fullVersion": "136.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "Xiaomi Redmi Note 11",
+        "mobile": true
+      }
+    }
+  },
+  {
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "platform": "Android",
+    "vendor": "Google Inc.",
+    "language": "ru-RU",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
+    "languages": [
+      "ru-RU",
+      "en"
+    ],
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2340,
+    "webGL": {
+      "renderer": "Mali-G68",
+      "vendor": "ARM"
+    },
+    "setUserAgentOverride": {
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
@@ -940,538 +2020,76 @@ const gadgets =  [
         "fullVersion": "135.0.0.0",
         "platform": "Android",
         "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Google Pixel 8 Pro",
+        "architecture": "arm",
+        "model": "Samsung Galaxy A54",
         "mobile": true
       }
     }
   },
-  { 
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
   {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
     "platform": "Android",
     "vendor": "Google Inc.",
-    "language": "en-US",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1344,
-    "height": 2992,
-    "webGL": {
-      "renderer": "Immortalis-G715",
-      "vendor": "ARM"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "135"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "135"
-          }
-        ],
-        "fullVersion": "135.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Google Pixel 8 Pro",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
+      "en",
       "en"
     ],
     "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2340,
     "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
+      "renderer": "Mali-G68",
+      "vendor": "ARM"
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
             "brand": "Chromium",
-            "version": "17"
+            "version": "138"
           },
           {
-            "brand": "Safari",
-            "version": "17"
+            "brand": "Google Chrome",
+            "version": "138"
           }
         ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
+        "fullVersion": "138.0.0.0",
+        "platform": "Android",
+        "platformVersion": "13.0.0",
+        "architecture": "arm",
+        "model": "Samsung Galaxy A54",
         "mobile": true
       }
     }
   },
   {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
+    "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "platform": "Android",
     "vendor": "Google Inc.",
-    "language": "en-US",
+    "language": "en",
+    "product": "Gecko",
+    "appCodeName": "Mozilla",
+    "appName": "Netscape",
     "languages": [
-      "en-US",
+      "en",
       "en"
     ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
+    "deviceMemory": 6,
+    "hardwareConcurrency": 8,
+    "width": 1080,
+    "height": 2400,
     "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
+      "renderer": "Mali-G78",
+      "vendor": "ARM"
     },
     "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Android NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
       "userAgentMetadata": {
         "brands": [
           {
@@ -1484,483 +2102,17 @@ const gadgets =  [
           }
         ],
         "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
         "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1344,
-    "height": 2992,
-    "webGL": {
-      "renderer": "Immortalis-G715",
-      "vendor": "ARM"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "135"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "135"
-          }
-        ],
-        "fullVersion": "135.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Google Pixel 8 Pro",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 6,
-    "hardwareConcurrency": 6,
-    "width": 1290,
-    "height": 2796,
-    "webGL": {
-      "renderer": "Apple A17 Pro GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5.1 Mobile/15E148 Safari/604.1",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "17"
-          },
-          {
-            "brand": "Safari",
-            "version": "17"
-          }
-        ],
-        "fullVersion": "17.0.0.0",
-        "platform": "iPhone",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "iPhone 15 Pro Max",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1440,
-    "height": 3120,
-    "webGL": {
-      "renderer": "Adreno 750",
-      "vendor": "Qualcomm"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "134"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "134"
-          }
-        ],
-        "fullVersion": "134.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Samsung Galaxy S24 Ultra",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1344,
-    "height": 2992,
-    "webGL": {
-      "renderer": "Immortalis-G715",
-      "vendor": "ARM"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "135"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "135"
-          }
-        ],
-        "fullVersion": "135.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Google Pixel 8 Pro",
-        "mobile": true
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "platform": "MacIntel",
-    "vendor": "Apple Computer, Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 16,
-    "hardwareConcurrency": 8,
-    "width": 3024,
-    "height": 1964,
-    "webGL": {
-      "renderer": "Apple M2 GPU",
-      "vendor": "Apple Inc."
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "16"
-          },
-          {
-            "brand": "Safari",
-            "version": "16"
-          }
-        ],
-        "fullVersion": "16.0.0.0",
-        "platform": "macOS",
-        "platformVersion": "13.4.1",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-    "platform": "Win32",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 32,
-    "hardwareConcurrency": 16,
-    "width": 3456,
-    "height": 2160,
-    "webGL": {
-      "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
-      "vendor": "NVIDIA Corporation"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "136"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "136"
-          }
-        ],
-        "fullVersion": "136.0.0.0",
-        "platform": "Win32",
-        "platformVersion": "14.0.0",
-        "architecture": "x86",
-        "model": "",
-        "mobile": false
-      }
-    }
-  },
-  {
-    "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-    "platform": "Android",
-    "vendor": "Google Inc.",
-    "language": "en-US",
-    "languages": [
-      "en-US",
-      "en"
-    ],
-    "deviceMemory": 12,
-    "hardwareConcurrency": 8,
-    "width": 1344,
-    "height": 2992,
-    "webGL": {
-      "renderer": "Immortalis-G715",
-      "vendor": "ARM"
-    },
-    "setUserAgentOverride": {
-      "userAgent": "Mozilla/5.0 (Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-      "userAgentMetadata": {
-        "brands": [
-          {
-            "brand": "Chromium",
-            "version": "135"
-          },
-          {
-            "brand": "Google Chrome",
-            "version": "135"
-          }
-        ],
-        "fullVersion": "135.0.0.0",
-        "platform": "Android",
-        "platformVersion": "14.0.0",
-        "architecture": "",
-        "model": "Google Pixel 8 Pro",
+        "platformVersion": "12.0.0",
+        "architecture": "arm",
+        "model": "Google Pixel 6a",
         "mobile": true
       }
     }
   }
-]
+];
+
+
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms * 1000));
 
@@ -2011,6 +2163,10 @@ async function start() {
         const obj = { brands: [], mobile: true, platform: profile.platform } 
 
         Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
+        Object.defineProperty(navigator, 'vendor', { get: () => profile.vendor });
+        Object.defineProperty(navigator, 'product', { get: () => profile.product });
+        Object.defineProperty(navigator, 'appName', { get: () => profile.appName });
+        Object.defineProperty(navigator, 'appCodeName', { get: () => profile.appCodeName });
 
         Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
         Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
@@ -2030,6 +2186,10 @@ async function start() {
 
       await newPage.evaluateOnNewDocument((profile) => {
         // Основные свойства navigator
+        Object.defineProperty(navigator, 'vendor', { get: () => profile.vendor });
+        Object.defineProperty(navigator, 'product', { get: () => profile.product });
+        Object.defineProperty(navigator, 'appName', { get: () => profile.appName });
+        Object.defineProperty(navigator, 'appCodeName', { get: () => profile.appCodeName });
         Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
         Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
         Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
@@ -2059,7 +2219,18 @@ async function start() {
   await page.setUserAgent(device.userAgent);
   await page.evaluateOnNewDocument((profile) => {
     // Основные свойства navigator
+
+    Object.defineProperty(navigator, 'vendor', { get: () => profile.vendor });
+    Object.defineProperty(navigator, 'product', { get: () => profile.product });
+    Object.defineProperty(navigator, 'appName', { get: () => profile.appName });
+    Object.defineProperty(navigator, 'appCodeName', { get: () => profile.appCodeName });
+
+
+
     Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
+    
+
+
     Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
     Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
 
@@ -2198,7 +2369,7 @@ async function start() {
 
 
 
-
+  //await page.goto("http://127.0.0.1:5500/index.html", { waitUntil: 'networkidle2' });
   await page.goto("https://best-earn.vercel.app/", { waitUntil: 'networkidle2' });
   await delay(2);
   await page.mouse.wheel({ deltaY: 2500 });
@@ -2228,6 +2399,7 @@ async function start() {
   console.log("FINISH");
 }
 
+start();
 
 app.get("/start", async (req, res) => {
   start();

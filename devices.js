@@ -648,3 +648,50 @@ const devices = [
     },
   },
 ];
+
+
+
+
+
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+  "platform": "Win32",
+  "vendor": "Google Inc.",
+  "language": "en-US",
+  "product": "Gecko",
+  "appCodeName": "Mozilla",
+  "appName": "Netscape",
+  "languages": [
+    "en-US",
+    "en"
+  ],
+  "deviceMemory": 32,
+  "hardwareConcurrency": 16,
+  "width": 3456,
+  "height": 2160,
+  "webGL": {
+    "renderer": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "vendor": "NVIDIA Corporation"
+  },
+  "setUserAgentOverride": {
+    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    "userAgentMetadata": {
+      "brands": [
+        {
+          "brand": "Chromium",
+          "version": "136"
+        },
+        {
+          "brand": "Google Chrome",
+          "version": "136"
+        }
+      ],
+      "fullVersion": "136.0.0.0",
+      "platform": "Win32",
+      "platformVersion": "14.0.0",
+      "architecture": "x86",
+      "model": "",
+      "mobile": false
+    }
+  }
+}
