@@ -2380,8 +2380,8 @@ async function start() {
       x: device.width - 302 + Math.floor(Math.random() * 128),
       y: device.height - 89 + Math.floor(Math.random() * 36),
     };
-    await page.mouse.click(cords.x, cords.y);
-    await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
+    //await page.mouse.click(cords.x, cords.y);
+    //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
   }, 50 + Math.floor(Math.random() * 50));
 
   setInterval(async () => {
