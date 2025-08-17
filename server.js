@@ -2373,7 +2373,7 @@ async function start() {
   await page.goto("https://earn-best-web.vercel.app/", { waitUntil: 'networkidle2' });
   await delay(2);
   //await page.mouse.wheel({ deltaY: 2500 });
-  await delay(2);
+  await delay(4);
   const elements = await page.$$('.sbt-tr_brd');
 
   setInterval(async () => {
@@ -2394,31 +2394,31 @@ async function start() {
   // const y = box.y + Math.random() * box.height;
   //console.log(box)
 
-  setInterval(async () => {
-    const cords = {
-      x: device.width - 302 + Math.floor(Math.random() * 128),
-      y: device.height - 89 + Math.floor(Math.random() * 36),
-    };
-    //await page.mouse.click(cords.x, cords.y);
-    //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
-  }, 50 + Math.floor(Math.random() * 50));
+  // setInterval(async () => {
+  //   const cords = {
+  //     x: device.width - 302 + Math.floor(Math.random() * 128),
+  //     y: device.height - 89 + Math.floor(Math.random() * 36),
+  //   };
+  //   //await page.mouse.click(cords.x, cords.y);
+  //   //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
+  // }, 50 + Math.floor(Math.random() * 50));
 
-  setInterval(async () => {
-    await page.mouse.click(
-      Math.ceil(Math.random() * device.width),
-      Math.ceil(Math.random() * device.height)
-    );
-    //await page.screenshot({ path: "public/img.png" })
-  }, 3425 + Math.floor(Math.random() * 3000));
+  // setInterval(async () => {
+  //   await page.mouse.click(
+  //     Math.ceil(Math.random() * device.width),
+  //     Math.ceil(Math.random() * device.height)
+  //   );
+  //   //await page.screenshot({ path: "public/img.png" })
+  // }, 3425 + Math.floor(Math.random() * 3000));
 
-  setInterval(async () => {
-    //await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
-  }, 15324 + Math.floor(Math.random() * 3000));
+  // setInterval(async () => {
+  //   //await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
+  // }, 15324 + Math.floor(Math.random() * 3000));
 
   console.log("FINISH");
 }
 
-start();
+//start();
 
 app.get("/start", async (req, res) => {
   start();
