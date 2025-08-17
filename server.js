@@ -2121,7 +2121,7 @@ async function start() {
   const device = gadgets[Math.floor(Math.random() * gadgets.length)];
   console.log(device);
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: [
       "--enable-notifications",
       "--no-sandbox",
@@ -2370,10 +2370,29 @@ async function start() {
 
 
   //await page.goto("http://127.0.0.1:5500/index.html", { waitUntil: 'networkidle2' });
-  await page.goto("https://best-earn.vercel.app/", { waitUntil: 'networkidle2' });
+  await page.goto("https://earn-best-web.vercel.app/", { waitUntil: 'networkidle2' });
   await delay(2);
-  await page.mouse.wheel({ deltaY: 2500 });
+  //await page.mouse.wheel({ deltaY: 2500 });
   await delay(2);
+  const elements = await page.$$('.sbt-tr_brd');
+
+  setInterval(async () => {
+    const box = await elements[Math.floor(Math.random()*elements.length)].boundingBox();
+    const cords = {
+      x: box.x + Math.random() * box.width,
+      y: box.y + Math.random() * box.height
+    };
+    console.log(cords)
+    await page.mouse.click(cords.x, cords.y);
+    //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
+  }, 500 + Math.floor(Math.random() * 50));
+
+
+  
+
+  // const x = box.x + Math.random() * box.width;
+  // const y = box.y + Math.random() * box.height;
+  //console.log(box)
 
   setInterval(async () => {
     const cords = {
@@ -2393,7 +2412,7 @@ async function start() {
   }, 3425 + Math.floor(Math.random() * 3000));
 
   setInterval(async () => {
-    await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
+    //await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
   }, 15324 + Math.floor(Math.random() * 3000));
 
   console.log("FINISH");
