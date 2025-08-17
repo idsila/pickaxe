@@ -2121,7 +2121,7 @@ async function start() {
   const device = gadgets[Math.floor(Math.random() * gadgets.length)];
   console.log(device);
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: [
       "--enable-notifications",
       "--no-sandbox",
@@ -2426,5 +2426,5 @@ app.get("/start", async (req, res) => {
 });
 
 app.listen("3000", (err) => {
-  err ? err : console.log("STARTD SERVER");
+  err ? err : console.log("STARTED SERVER");
 });
