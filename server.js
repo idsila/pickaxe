@@ -2385,7 +2385,7 @@ async function start() {
     console.log(cords)
     await page.mouse.click(cords.x, cords.y);
     //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
-  }, 30000 + Math.floor(Math.random() * 50));
+  }, 300 + Math.floor(Math.random() * 50));
 
 
   
