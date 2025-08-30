@@ -179,13 +179,17 @@ async function start() {
         })
       });
       // Основные свойства navigator
+
+      Object.defineProperty(navigator, 'product', { get: () => profile.product });
+      Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
+      Object.defineProperty(navigator, 'appCodeName', { get: () => profile.appCodeName });
+      Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
+
       Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
       Object.defineProperty(navigator, 'vendor', { get: () => profile.vendor });
-      Object.defineProperty(navigator, 'product', { get: () => profile.product });
       Object.defineProperty(navigator, 'appName', { get: () => profile.appName });
-      Object.defineProperty(navigator, 'appCodeName', { get: () => profile.appCodeName });
-      Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
-      Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => profile.hardwareConcurrency });
+
+ 
 
       // WebGL подмена
       const originalGetParameter = WebGLRenderingContext.prototype.getParameter;
