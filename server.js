@@ -3,7 +3,7 @@ const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const gadgets = require('./gadgets.js');
+const gadget = require('./use.js');
 
 
 puppeteer.use(StealthPlugin());
@@ -13,14 +13,12 @@ app.use(express.static("public"));
 
 
 
-
-
 const delay = (ms) => new Promise((r) => setTimeout(r, ms * 1000));
 
 async function start() {
   console.log("STARTED BOT");
   // const device = gadgets[Math.floor(Math.random() * gadgets.length)];
-  const device = gadgets[0];
+  const device = gadget;
   console.log(device);
   const browser = await puppeteer.launch({
     headless: false,
@@ -42,6 +40,8 @@ async function start() {
   });
   const page = await browser.newPage();
   const client = await page.target().createCDPSession();
+
+  
 
   await client.send('Network.setUserAgentOverride', device.setUserAgentOverride);
 
@@ -119,13 +119,7 @@ async function start() {
         return getFakeCanvas();
       };
   
-      // WebGL vendor/renderer
-      const getParameter = WebGLRenderingContext.prototype.getParameter;
-      WebGLRenderingContext.prototype.getParameter = function (parameter) {
-        if (parameter === 37445) return "Intel Inc.";
-        if (parameter === 37446) return "Intel Iris OpenGL Engine";
-        return getParameter.call(this, parameter);
-      };
+      
   
       // AudioContext fingerprint
       const copy = AudioBuffer.prototype.getChannelData;
@@ -166,10 +160,7 @@ async function start() {
   
   
   
-      // new
-      // Object.defineProperty(navigator, "appVersion", { 
-      //   get: () => `5.0 (${profile.platform} ${profile.platformVersion}; ${profile.model}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${profile.setUserAgentOverride.userAgentMetadata.fullVersion} Mobile Safari/537.36` 
-      // });
+     
       
       Object.defineProperty(navigator, "userAgentData", { 
         get: () => ({
@@ -178,7 +169,7 @@ async function start() {
           platform: profile.setUserAgentOverride.userAgentMetadata.platform
         })
       });
-      // Основные свойства navigator
+      //Основные свойства navigator
 
       Object.defineProperty(navigator, 'product', { get: () => profile.product });
       Object.defineProperty(navigator, 'deviceMemory', { get: () => profile.deviceMemory });
@@ -188,7 +179,7 @@ async function start() {
       Object.defineProperty(navigator, 'platform', { get: () => profile.platform });
       Object.defineProperty(navigator, 'vendor', { get: () => profile.vendor });
       Object.defineProperty(navigator, 'appName', { get: () => profile.appName });
-
+      Object.defineProperty(navigator, 'connection', { get: () => profile.connection });
  
 
       // WebGL подмена
@@ -200,8 +191,9 @@ async function start() {
       };
 
       // Разрешение экрана
-      Object.defineProperty(screen, 'width', { get: () => profile.width });
-      Object.defineProperty(screen, 'height', { get: () => profile.height });
+      Object.defineProperty(screen, 'width', { get: () => profile.screenWidth });
+      Object.defineProperty(screen, 'height', { get: () => profile.screenHeight });
+
      }, device);
     
 
@@ -224,133 +216,15 @@ async function start() {
 
       await navigatorUpdate(page, device);
       await navigatorUpdate(newPage, device);
-      //await page.evaluateOnNewDocument((profile) => { navigatorUpdate(profile); }, device);
-      //await newPage.evaluateOnNewDocument((profile) => { navigatorUpdate(profile); }, device);
+      
 
       await page.setExtraHTTPHeaders({'Accept-Language': 'en-US,en;q=0.9'});
       await newPage.setExtraHTTPHeaders({'Accept-Language': 'en-US,en;q=0.9'});
 
-      await newPage.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 1 });
-      await page.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 1 });
+      await newPage.setViewport({ width: device.screenWidth, height: device.screenHeight, deviceScaleFactor: 1 });
+      await page.setViewport({ width: device.screenWidth, height: device.screenHeight, deviceScaleFactor: 1 });
 
-      // await page.evaluateOnNewDocument(() => {
-
-      //   Object.defineProperty(navigator, "webdriver", {
-      //     get: () => false,
-      //   });
-    
-      //   window.chrome = {
-      //     runtime: {}
-      //   };
-    
-    
-      //   const originalQuery = window.navigator.permissions.query;
-      //   window.navigator.permissions.query = (parameters) =>
-      //     parameters.name === "notifications"
-      //       ? Promise.resolve({ state: Notification.permission })
-      //       : originalQuery(parameters);
-    
-      
-      //   Object.defineProperty(navigator, "languages", {
-      //     get: () => ["en-US", "en"],
-      //   });
-    
-      //   const fakePlugins = [
-      //     {
-      //       name: "Chrome PDF Plugin",
-      //       filename: "internal-pdf-viewer",
-      //       description: "Portable Document Format",
-      //     },
-      //     {
-      //       name: "Chrome PDF Viewer",
-      //       filename: "mhjfbmdgcfjbbpaeojofohoefgiehjai",
-      //       description: "",
-      //     },
-      //     {
-      //       name: "Native Client",
-      //       filename: "internal-nacl-plugin",
-      //       description: "",
-      //     },
-      //     {
-      //       name: "Widevine Content Decryption Module",
-      //       filename: "widevinecdmadapter.dll",
-      //       description: "Widevine CDM for DRM",
-      //     },
-      //   ];
-      //   const fakePluginArray = fakePlugins.map((p) => {
-      //     return Object.setPrototypeOf(p, Plugin.prototype);
-      //   });
-      //   Object.setPrototypeOf(fakePluginArray, PluginArray.prototype);
-      //   Object.defineProperty(navigator, "plugins", {
-      //     get: () => fakePluginArray,
-      //   });
-    
-      //   // navigator.mimeTypes
-      //   const fakeMimeTypes = [
-      //     {
-      //       type: "application/pdf",
-      //       description: "",
-      //       suffixes: "pdf",
-      //       enabledPlugin: fakePlugins[0],
-      //     },
-      //   ];
-      //   Object.setPrototypeOf(fakeMimeTypes, MimeTypeArray.prototype);
-      //   Object.defineProperty(navigator, "mimeTypes", {
-      //     get: () => fakeMimeTypes,
-      //   });
-    
-      //   // canvas spoof
-      //   const getFakeCanvas = () => "data:image/png;base64,fakeimgstring";
-      //   const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-      //   HTMLCanvasElement.prototype.toDataURL = function () {
-      //     return getFakeCanvas();
-      //   };
-    
-      //   // WebGL vendor/renderer
-      //   const getParameter = WebGLRenderingContext.prototype.getParameter;
-      //   WebGLRenderingContext.prototype.getParameter = function (parameter) {
-      //     if (parameter === 37445) return "Intel Inc.";
-      //     if (parameter === 37446) return "Intel Iris OpenGL Engine";
-      //     return getParameter.call(this, parameter);
-      //   };
-    
-      //   // AudioContext fingerprint
-      //   const copy = AudioBuffer.prototype.getChannelData;
-      //   AudioBuffer.prototype.getChannelData = function () {
-      //     const results = copy.apply(this, arguments);
-      //     for (let i = 0; i < results.length; i += 100) {
-      //       results[i] = results[i] + Math.random() * 0.0000001;
-      //     }
-      //     return results;
-      //   };
-    
-      //   // удаление window.cdc_*
-      //   for (let key in window) {
-      //     if (key.match(/^\$?cdc_/) || key === "__webdriver_evaluate") {
-      //       delete window[key];
-      //     }
-      //   }
-    
-      //   // eval защита
-      //   const originalEval = window.eval;
-      //   window.eval = function () {
-      //     if (arguments[0].toString().includes("webdriver")) {
-      //       return null;
-      //     }
-      //     return originalEval(...arguments);
-      //   };
-    
-      //   // Function защита
-      //   const originalFunction = Function.prototype.toString;
-      //   Function.prototype.toString = function () {
-      //     if (this.toString().includes("[native code]")) {
-      //       return "function () { [native code] }";
-      //     }
-      //     return originalFunction.apply(this, arguments);
-      //   };
-      // });
-
-      
+     
       console.log("New page opened, user-agent set.");
     }
   });
@@ -364,14 +238,10 @@ async function start() {
   await page.setUserAgent(device.userAgent);
   await navigatorUpdate(page, device);
 
-  //await page.evaluateOnNewDocument((profile) => { navigatorUpdate(profile); }, device);
+
   await page.setExtraHTTPHeaders({'Accept-Language': 'en-US,en;q=0.9'});
-  await page.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 1 });
+  await page.setViewport({ width: device.screenWidth, height: device.screenHeight, deviceScaleFactor: 1 });
 
-  // await page.evaluateOnNewDocument(() => {
-    
-
-  // });
 
 
 
@@ -388,26 +258,26 @@ async function start() {
 
   
 
-  setInterval(async () => {
-    const cords = {
-      x: device.width - 302 + Math.floor(Math.random() * 128),
-      y: device.height - 89 + Math.floor(Math.random() * 36),
-    };
-    //await page.mouse.click(cords.x, cords.y);
-    //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
-  }, 50 + Math.floor(Math.random() * 50));
+  // setInterval(async () => {
+  //   const cords = {
+  //     x: device.width - 302 + Math.floor(Math.random() * 128),
+  //     y: device.height - 89 + Math.floor(Math.random() * 36),
+  //   };
+  //   //await page.mouse.click(cords.x, cords.y);
+  //   //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
+  // }, 50 + Math.floor(Math.random() * 50));
 
-  setInterval(async () => {
-    await page.mouse.click(
-      Math.ceil(Math.random() * device.width),
-      Math.ceil(Math.random() * device.height)
-    );
-    //await page.screenshot({ path: "public/img.png" })
-  }, 3425 + Math.floor(Math.random() * 3000));
+  // setInterval(async () => {
+  //   await page.mouse.click(
+  //     Math.ceil(Math.random() * device.width),
+  //     Math.ceil(Math.random() * device.height)
+  //   );
+  //   //await page.screenshot({ path: "public/img.png" })
+  // }, 3425 + Math.floor(Math.random() * 3000));
 
-  setInterval(async () => {
-    //await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
-  }, 15324 + Math.floor(Math.random() * 3000));
+  // setInterval(async () => {
+  //   //await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
+  // }, 15324 + Math.floor(Math.random() * 3000));
 
   console.log("FINISH");
 }

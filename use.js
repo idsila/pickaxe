@@ -1,170 +1,101 @@
 const userAgent = require("user-agents");
-
-
-// const ua = new userAgent((user) => {
-//   return user.userAgent.includes("Android");
-// });
-
-// console.log(ua.data);
-
-const devices = {
-  'Android': 'arm',
-  'Windows': 'x86',
-  'iOS':'arm'
-}
-const arrMemory = [ 2,4,6 ]
-function createUserAgentAndroid(){
-  const obj = new userAgent((user) => { return user.userAgent.includes("Android"); });
-  const currentPlatform = obj.data.userAgent.split('; ')[1].split(' ')[0];
-  const currentPlatformVersion = obj.data.userAgent.split(';')[1].split(' ')[2];
-  const currentDeviceMemory = arrMemory[Math.ceil(arrMemory.random()*arrMemory.length)]
-  obj.data.appCodeName =  obj.data.userAgent.split('/')[0];
-  obj.data.appVersion =  obj.data.userAgent.split('Mozilla/')[1];
-  obj.data.product =  "Gecko";
-  obj.data.setUserAgentOverride = {
-    userAgent: obj.data.userAgent,
-    userAgentMetadata: {
-      fullVersion: obj.data.userAgent.split('/')[3].split(' ')[0],
-      platform: currentPlatform,
-      platformVersion: `${currentPlatformVersion}.0.0`,
-      architecture: devices[currentPlatform], 
-      mobile: obj.data.userAgent.includes('Mobile'),
-      brands: [
-        {
-         brand: 'Not;A=Brand',
-         version: '99'
-        },
-        {
-          brand: "Chromium",
-          version: currentPlatformVersion
-        },
-        {
-          brand: "Google Chrome",
-          version: currentPlatformVersion
-        }
-      ],
-      
-    }
-  };
-  console.log(obj.data)
-}
-
-createUserAgentAndroid()
-
-// setInterval(() => {
-//   createUserAgentAndroid()
-// }, 300)
-
-//"appCodeName": "Mozilla",
-//
-//
-//
-const p2 = {
-  userAgent: 'Mozilla/5.0 (Linux; Android 5.1.1; KFSUWI) AppleWebKit/537.36 (KHTML, like Gecko) Silk/108.18.4 like Chrome/108.0.5359.220 Safari/537.36',
-  appName: 'Netscape',     
-  platform: 'Linux armv8l',
-  vendor: 'Google Inc.',
-  viewportHeight: 1094,
-  viewportWidth: 800,
-
-  connection: {
-    downlink: 8.95,        
-    downlinkMax: null,     
-    effectiveType: '4g',   
-    rtt: 200,
-    type: 'wifi'
-  },
-
-  pluginsLength: 0,
-  screenHeight: 1280,
-  screenWidth: 800,
-  
- 
-  
-  weight: 0.00009903637167482612,
-  deviceCategory: 'tablet'
-}
-
-
-const pp = {
-  "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
-  "appName": "Netscape",
-  "platform": "Android",
-  "vendor": "Google Inc.",
-  "width": 1080,
-  "height": 2400,
-  "product": "Gecko",
-  "appCodeName": "Mozilla",
-  "setUserAgentOverride": {
-    "fullVersion": "138.0.0.0",
-    "platform": "Android",
-    "platformVersion": "12.0.0",
-    "architecture": "arm",
-    "brands": [
-      {
-        "brand": "Chromium",
-        "version": "138"
-      },
-      {
-        "brand": "Google Chrome",
-        "version": "138"
-      }
-    ],
-    
-
-    "mobile": true
-  },
-
-
-
-
-  "language": "en-US",
-
-
-
-  "languages": [
-    "en-US",
-    "en"
-  ],
-  "deviceMemory": 6,
-  "hardwareConcurrency": 8,
- 
-  "webGL": {
-    "renderer": "Adreno 610",
-    "vendor": "Qualcomm"
-  },
-
-}
-
-
-
-
-
-// Импортируем библиотеку
-const userAgent = require('user-agents');
 const fs = require('fs');
 
-// Случайный UA, где устройство iPhone
+
+
+
+
+
+const androidWebGLProfiles = [
+  { vendor: "Qualcomm", renderer: "Adreno 610" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 612" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 618" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 619" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 619L" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 620" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 640" },
+  { vendor: "Qualcomm", renderer: "Adreno 650" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 660" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 730" }, 
+  { vendor: "Qualcomm", renderer: "Adreno 740" }, 
+  { vendor: "ARM", renderer: "Mali-G52" },   
+  { vendor: "ARM", renderer: "Mali-G57" },   
+  { vendor: "ARM", renderer: "Mali-G68" },   
+  { vendor: "ARM", renderer: "Mali-G72" },   
+  { vendor: "ARM", renderer: "Mali-G76" },   
+  { vendor: "ARM", renderer: "Mali-G77" },   
+  { vendor: "ARM", renderer: "Mali-G78" },   
+  { vendor: "ARM", renderer: "Mali-G710" }, 
+  { vendor: "ARM", renderer: "Mali-G715" },
+  { vendor: "Imagination Technologies", renderer: "PowerVR GE8100" },  
+  { vendor: "Imagination Technologies", renderer: "PowerVR GE8320" },  
+  { vendor: "Imagination Technologies", renderer: "PowerVR GM9446" }  
+];
+
+const windowsWebGLProfiles = [
+  { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 4090" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 4080" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 4070" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 4060" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 3080" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 3070" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce GTX 1660" },
+  { vendor: "NVIDIA Corporation", renderer: "GeForce GTX 1050" },
+  { vendor: "AMD", renderer: "Radeon RX 7900 XT" },
+  { vendor: "AMD", renderer: "Radeon RX 7800 XT" },
+  { vendor: "AMD", renderer: "Radeon RX 7700 XT" },
+  { vendor: "AMD", renderer: "Radeon RX 6900 XT" },
+  { vendor: "AMD", renderer: "Radeon RX 6800 XT" },
+  { vendor: "AMD", renderer: "Radeon RX 6700 XT" },
+  { vendor: "AMD", renderer: "Radeon RX 6600" },
+  { vendor: "AMD", renderer: "Radeon RX 6500 XT" },
+  { vendor: "Intel Inc.", renderer: "UHD Graphics 770" },
+  { vendor: "Intel Inc.", renderer: "UHD Graphics 730" },
+  { vendor: "Intel Inc.", renderer: "UHD Graphics 710" },
+  { vendor: "Intel Inc.", renderer: "UHD Graphics 630" },
+  { vendor: "Intel Inc.", renderer: "HD Graphics 630" },
+  { vendor: "Intel Inc.", renderer: "HD Graphics 620" },
+  { vendor: "Intel Inc.", renderer: "Iris Xe Graphics" },
+  { vendor: "Intel Inc.", renderer: "Iris Plus Graphics 655" },
+  { vendor: "Intel Inc.", renderer: "Iris Pro Graphics 580" }
+]
+
+
+
+
+
+function getUserAgent(){
+  const kf = Math.floor(Math.random()*100);
+  if(kf < 40){
+    return createUserAgentAndroid();
+  }
+  else{
+    return createUserAgentWindows();
+  }
+}
 
 const devices = {
   'Android': 'arm',
-  'Windows': 'x86',
-  'iOS':'arm'
+  'Windows': 'x86'
 }
-const arrMemory = [ 2,4,6 ]
+const arrMemory = [ 2,4,6 ];
+
+const arrMemoryWin = [ 8, 10, 12, 14 ]
+
+
 function createUserAgentAndroid(){
   const obj = new userAgent((user) => { return user.userAgent.includes("Android"); });
   const currentPlatform = obj.data.userAgent.split('; ')[1].split(' ')[0];
   const currentPlatformVersion = obj.data.userAgent.split(';')[1].split(' ')[2];
   const currentVersion = obj.data.userAgent.split('/')[3].split(' ')[0];
-  const currentDeviceMemory =
-  arrMemory[Math.ceil(Math.random()*arrMemory.length)];
+  const currentDeviceMemory = arrMemory[Math.floor(Math.random()*arrMemory.length)];
+
   obj.data.appCodeName =  obj.data.userAgent.split('/')[0];
   obj.data.appVersion =  obj.data.userAgent.split('Mozilla/')[1];
   obj.data.deviceMemory = currentDeviceMemory;
   obj.data.hardwareConcurrency = currentDeviceMemory+2;
   obj.data.product =  "Gecko";
-  console.log(currentPlatformVersion)
+
   obj.data.setUserAgentOverride = {
     userAgent: obj.data.userAgent,
     userAgentMetadata: {
@@ -173,6 +104,7 @@ function createUserAgentAndroid(){
       platformVersion: `${currentPlatformVersion ?? '10'}.0.0`,
       architecture: devices[currentPlatform], 
       mobile: obj.data.userAgent.includes('Mobile'),
+      model: "",
       brands: [
         {
          brand: 'Not;A=Brand',
@@ -190,19 +122,61 @@ function createUserAgentAndroid(){
       
     }
   };
+
+  obj.data.webGL =  androidWebGLProfiles[Math.floor(Math.random()*androidWebGLProfiles.length)];
+
   return obj.data
 }
-//console.log(JSON.stringify(createUserAgentAndroid(), null, 2));
-fs.writeFileSync('obj.json',JSON.stringify(createUserAgentAndroid(), null, 2))
 
 
 
 
+function createUserAgentWindows(){
+  const obj = new userAgent((user) => { return user.userAgent.includes("Windows"); });
+  const currentPlatform = obj.data.userAgent.split('; ')[1].split(' ')[0];
+  const currentPlatformVersion = obj.data.userAgent.split(';')[1].split(' ')[2];
+  const currentVersion = obj.data.userAgent.split('/')[3].split(' ')[0];
+  const currentDeviceMemory = arrMemoryWin[Math.floor(Math.random()*arrMemoryWin.length)];
 
-// Создаём экземпляр
-//const userAgent = new UserAgent({ deviceCategory: 'mobile', platform: 'Android'});
+  obj.data.appCodeName =  obj.data.userAgent.split('/')[0];
+  obj.data.appVersion =  obj.data.userAgent.split('Mozilla/')[1];
+  obj.data.deviceMemory = currentDeviceMemory;
+  obj.data.hardwareConcurrency = currentDeviceMemory+2;
+  obj.data.product =  "Gecko";
 
-// Можно и объектом:
-//console.log(userAgent.data);
-//console.log(userAgent.data);
-//console.log(userAgent.data);
+  obj.data.setUserAgentOverride = {
+    userAgent: obj.data.userAgent,
+    userAgentMetadata: {
+      fullVersion: currentVersion,
+      platform: currentPlatform,
+      platformVersion: `${currentPlatformVersion ?? '10'}.0.0`,
+      architecture: devices[currentPlatform], 
+      mobile: obj.data.userAgent.includes('Mobile'),
+      model: "",
+      brands: [
+        {
+         brand: 'Not;A=Brand',
+         version: '99'
+        },
+        {
+          brand: "Chromium",
+          version: currentVersion.split('.')[0]
+        },
+        {
+          brand: "Google Chrome",
+          version: currentVersion.split('.')[0]
+        }
+      ],
+      
+    }
+  };
+
+  obj.data.webGL =  windowsWebGLProfiles[Math.floor(Math.random()*windowsWebGLProfiles.length)];
+
+  return obj.data
+}
+
+
+module.exports = getUserAgent();
+
+//fs.writeFileSync('obj.json', JSON.stringify(getUserAgent(), null, 2));

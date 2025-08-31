@@ -1,0 +1,102 @@
+{
+  "appName": "Netscape",
+  "connection": {
+    "downlink": 10,
+    "effectiveType": "4g",
+    "rtt": 50
+  },
+  "platform": "Win32",
+  "pluginsLength": 5,
+  "screenHeight": 1080,
+  "screenWidth": 1920,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "vendor": "Google Inc.",
+  "viewportHeight": 945,
+  "viewportWidth": 1920,
+  "weight": 0.00010672269490305811,
+  "deviceCategory": "desktop",
+  "appCodeName": "Mozilla",
+  "appVersion": "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "deviceMemory": 10,
+  "hardwareConcurrency": 12,
+  "product": "Gecko",
+  "setUserAgentOverride": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "userAgentMetadata": {
+      "fullVersion": "138.0.0.0",
+      "platform": "Win64",
+      "platformVersion": "10.0.0",
+      "mobile": false,
+      "model": "",
+      "brands": [
+        {
+          "brand": "Not;A=Brand",
+          "version": "99"
+        },
+        {
+          "brand": "Chromium",
+          "version": "138"
+        },
+        {
+          "brand": "Google Chrome",
+          "version": "138"
+        }
+      ]
+    }
+  },
+  "webGL": {
+    "vendor": "Intel Inc.",
+    "renderer": "HD Graphics 630"
+  }
+}
+
+
+
+
+{
+  "userAgent": "Mozilla/5.0 (Android NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "userAgentMetadata": {
+    "brands": [
+      {
+        "brand": "Chromium",
+        "version": "138"
+      },
+      {
+        "brand": "Google Chrome",
+        "version": "138"
+      }
+    ],
+    "fullVersion": "138.0.0.0",
+    "platform": "Android",
+    "platformVersion": "12.0.0",
+    "architecture": "arm",
+    "model": "Xiaomi Redmi Note 11",
+    "mobile": true
+  }
+}
+
+
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+  "userAgentMetadata": {
+    "fullVersion": "138.0.0.0",
+    "platform": "Win64",
+    "platformVersion": "10.0.0",
+    "mobile": false,
+    "model": "",
+    "brands": [
+      {
+        "brand": "Not;A=Brand",
+        "version": "99"
+      },
+      {
+        "brand": "Chromium",
+        "version": "138"
+      },
+      {
+        "brand": "Google Chrome",
+        "version": "138"
+      }
+    ]
+  }
+}
