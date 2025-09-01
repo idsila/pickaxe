@@ -1,0 +1,48 @@
+{
+  "width": 2560,
+  "height": 1600,
+  "windowWidth": 1931,
+  "windowHeight": 1171,
+  "connection": {
+    "effectiveType": "wifi",
+    "rtt": 26,
+    "downlink": 30.5
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+  "appName": "Netscape",
+  "vendor": "Google Inc.",
+  "appCodeName": "Mozilla",
+  "appVersion": "5.0 (Windows NT 11.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+  "deviceMemory": 32,
+  "hardwareConcurrency": 34,
+  "product": "Gecko",
+  "setUserAgentOverride": {
+    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "userAgentMetadata": {
+      "fullVersion": "121.0.0.0",
+      "platform": "Windows",
+      "platformVersion": "11.0",
+      "architecture": "x64",
+      "mobile": false,
+      "model": "",
+      "brands": [
+        {
+          "brand": "Not;A=Brand",
+          "version": "99"
+        },
+        {
+          "brand": "Chromium",
+          "version": "121"
+        },
+        {
+          "brand": "Google Chrome",
+          "version": "121"
+        }
+      ]
+    }
+  },
+  "webGL": {
+    "vendor": "NVIDIA Corporation",
+    "renderer": "GeForce RTX 3070"
+  }
+}
