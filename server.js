@@ -4,19 +4,18 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const gadget = require("./use.js");
+const gadgets = require("./gadgets.js");
 
 puppeteer.use(StealthPlugin());
 app.use(cors({ methods: ["GET", "POST"] }));
 app.use(express.json());
 app.use(express.static("public"));
 
-
-
 const delay = (ms) => new Promise((r) => setTimeout(r, ms * 1000));
 
 async function start() {
   console.log("STARTED BOT");
-  const device = gadget;
+  const device = gadget();
 
   const browser = await puppeteer.launch({
     headless: true,

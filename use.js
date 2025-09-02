@@ -316,7 +316,7 @@ function getUserAgent(){
 }
 
 
-const cuaw = getUserAgent();
+const cuaw = getUserAgent;
 
 
 
