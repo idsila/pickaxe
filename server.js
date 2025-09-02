@@ -10,7 +10,7 @@ app.use(cors({ methods: ["GET", "POST"] }));
 app.use(express.json());
 app.use(express.static("public"));
 
-let count = 0;
+
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms * 1000));
 
@@ -20,7 +20,12 @@ async function start() {
 
   const browser = await puppeteer.launch({
     headless: false,
+    defaultViewport: {
+      width: device.windowWidth,
+      height: device.windowHeight
+    },
     args: [
+      `--window-size=${device.width},${device.height}`,
       "--enable-notifications",
       "--no-sandbox",
       "--disable-setuid-sandbox",
@@ -32,15 +37,22 @@ async function start() {
       "--disable-gpu",
       "--disable-blink-features=AutomationControlled",
       "--disable-infobars",
+
+      "--disable-breakpad",
+      "--disable-software-rasterizer",
+      "--force-device-scale-factor=1",
+      "--lang=en-US",
+
+
+
       `--user-agent=${device.userAgent}`,
     ],
   });
   const page = await browser.newPage();
   const client = await page.target().createCDPSession();
 
-  const setUserAgentOverride = device.userAgent.includes('Firefox') ? { userAgent: device.userAgent } : device.setUserAgentOverride
-
-  await client.send('Network.setUserAgentOverride', setUserAgentOverride);
+  
+  await client.send('Network.setUserAgentOverride', device.setUserAgentOverride);
 
   async function navigatorUpdate(currnetPage, device) {
     await currnetPage.evaluateOnNewDocument((profile) => {
@@ -208,9 +220,9 @@ async function start() {
       const client = await page.target().createCDPSession();
       const newClient = await newPage.target().createCDPSession();
 
-      await client.send('Network.setUserAgentOverride', setUserAgentOverride);
+      await client.send('Network.setUserAgentOverride', device.setUserAgentOverride);
 
-      await newClient.send('Network.setUserAgentOverride', setUserAgentOverride);
+      await newClient.send('Network.setUserAgentOverride', device.setUserAgentOverride);
 
       await navigatorUpdate(page, device);
       await navigatorUpdate(newPage, device);
@@ -235,8 +247,6 @@ async function start() {
     }
   });
 
-  //count++;
-  //console.log(count)
 
   await page.setUserAgent(device.userAgent);
   await navigatorUpdate(page, device);
@@ -249,38 +259,39 @@ async function start() {
   });
 
   //await page.goto("http://127.0.0.1:5500/index.html", { waitUntil: 'networkidle2' });
-  await page.goto("http://127.0.0.1:5500/index.html", {
+  await page.goto("https://idsila.vercel.app/style.css", {
     waitUntil: "networkidle2",
   });
   await delay(2);
-  //await page.mouse.wheel({ deltaY: 2500 });
+  await page.mouse.wheel({ deltaY: 2500 });
   await delay(4);
 
-  // setInterval(async () => {
-  //   const cords = {
-  //     x: device.width - 302 + Math.floor(Math.random() * 128),
-  //     y: device.height - 89 + Math.floor(Math.random() * 36),
-  //   };
-  //   //await page.mouse.click(cords.x, cords.y);
-  //   //await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
-  // }, 50 + Math.floor(Math.random() * 50));
+  setInterval(async () => {
+    const cords = {
+      x: device.width - 302 + Math.floor(Math.random() * 128),
+      y: device.height - 89 + Math.floor(Math.random() * 36),
+    };
+    await page.mouse.click(cords.x, cords.y);
+    await page.mouse.wheel({ deltaY: -Math.floor(Math.random() * 3000) });
+  }, 50 + Math.floor(Math.random() * 50));
 
-  // setInterval(async () => {
-  //   await page.mouse.click(
-  //     Math.ceil(Math.random() * device.width),
-  //     Math.ceil(Math.random() * device.height)
-  //   );
-  //   //await page.screenshot({ path: "public/img.png" })
-  // }, 3425 + Math.floor(Math.random() * 3000));
+  setInterval(async () => {
+    await page.mouse.click(
+      Math.ceil(Math.random() * device.width),
+      Math.ceil(Math.random() * device.height)
+    );
+    //await page.screenshot({ path: "public/img.png" })
+  }, 3425 + Math.floor(Math.random() * 3000));
 
-  // setInterval(async () => {
-  //   //await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
-  // }, 15324 + Math.floor(Math.random() * 3000));
+  setInterval(async () => {
+    await page.mouse.wheel({ deltaY: Math.floor(Math.random() * 3000) });
+  }, 15324 + Math.floor(Math.random() * 3000));
 
   console.log("FINISH");
 }
 
 start();
+
 
 app.get("/start", async (req, res) => {
   start();

@@ -6,175 +6,23 @@ const fs = require('fs');
 
 
 
-const androidWebGLProfiles = [
-  { vendor: "Qualcomm", renderer: "Adreno 610" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 612" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 618" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 619" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 619L" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 620" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 640" },
-  { vendor: "Qualcomm", renderer: "Adreno 650" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 660" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 730" }, 
-  { vendor: "Qualcomm", renderer: "Adreno 740" }, 
-  { vendor: "ARM", renderer: "Mali-G52" },   
-  { vendor: "ARM", renderer: "Mali-G57" },   
-  { vendor: "ARM", renderer: "Mali-G68" },   
-  { vendor: "ARM", renderer: "Mali-G72" },   
-  { vendor: "ARM", renderer: "Mali-G76" },   
-  { vendor: "ARM", renderer: "Mali-G77" },   
-  { vendor: "ARM", renderer: "Mali-G78" },   
-  { vendor: "ARM", renderer: "Mali-G710" }, 
-  { vendor: "ARM", renderer: "Mali-G715" },
-  { vendor: "Imagination Technologies", renderer: "PowerVR GE8100" },  
-  { vendor: "Imagination Technologies", renderer: "PowerVR GE8320" },  
-  { vendor: "Imagination Technologies", renderer: "PowerVR GM9446" }  
-];
 
 
 
 
-
-
-function getUserAgent(){
-  const kf = Math.floor(Math.random()*100);
-  if(kf < 40){
-    return createUserAgentAndroid();
-  }
-  else{
-    return createUserAgentWindows();
-  }
-}
-
-const devices = {
-  'Android': 'arm',
-  'Windows': 'x86'
-}
-const arrMemory = [ 2,4,6 ];
-
-const arrMemoryWin = [ 8, 10, 12, 14 ]
-
-
-function createUserAgentAndroid(){
-  const obj = new userAgent((user) => { return user.userAgent.includes("Android"); });
-  const currentPlatform = obj.data.userAgent.split('; ')[1].split(' ')[0];
-  const currentPlatformVersion = obj.data.userAgent.split(';')[1].split(' ')[2];
-  const currentVersion = obj.data.userAgent.split('/')[3].split(' ')[0];
-  const currentDeviceMemory = arrMemory[Math.floor(Math.random()*arrMemory.length)];
-
-  obj.data.appCodeName =  obj.data.userAgent.split('/')[0];
-  obj.data.appVersion =  obj.data.userAgent.split('Mozilla/')[1];
-  obj.data.deviceMemory = currentDeviceMemory;
-  obj.data.hardwareConcurrency = currentDeviceMemory+2;
-  obj.data.product =  "Gecko";
-
-  obj.data.setUserAgentOverride = {
-    userAgent: obj.data.userAgent,
-    userAgentMetadata: {
-      fullVersion: currentVersion,
-      platform: 'Android',
-      platformVersion: `${currentPlatformVersion ?? '10'}.0.0`,
-      architecture: devices[currentPlatform], 
-      mobile: obj.data.userAgent.includes('Mobile'),
-      model: "",
-      brands: [
-        {
-         brand: 'Not;A=Brand',
-         version: '99'
-        },
-        {
-          brand: "Chromium",
-          version: currentVersion.split('.')[0]
-        },
-        {
-          brand: "Google Chrome",
-          version: currentVersion.split('.')[0]
-        }
-      ],
-      
-    }
-  };
-
-  obj.data.webGL =  androidWebGLProfiles[Math.floor(Math.random()*androidWebGLProfiles.length)];
-
-  return obj.data
-}
-
-
-
-
-function createUserAgentWindows(){
-  const obj = new userAgent((user) => { return user.userAgent.includes("Windows"); });
-  const currentPlatform = obj.data.userAgent.split('; ')[1].split(' ')[0];
-  const currentPlatformVersion = obj.data.userAgent.split(';')[1].split(' ')[2];
-  const currentVersion = obj.data.userAgent.split('/')[3].split(' ')[0];
-  const currentDeviceMemory = arrMemoryWin[Math.floor(Math.random()*arrMemoryWin.length)];
-
-  obj.data.appCodeName =  obj.data.userAgent.split('/')[0];
-  obj.data.appVersion =  obj.data.userAgent.split('Mozilla/')[1];
-  obj.data.deviceMemory = currentDeviceMemory;
-  obj.data.hardwareConcurrency = currentDeviceMemory+2;
-  obj.data.product =  "Gecko";
-
-  obj.data.setUserAgentOverride = {
-    userAgent: obj.data.userAgent,
-    userAgentMetadata: {
-      fullVersion: currentVersion,
-      platform: 'Windows',
-      platformVersion: `${currentPlatformVersion ?? '10'}.0.0`,
-      architecture: 'x86', 
-      mobile: obj.data.userAgent.includes('Mobile'),
-      model: "",
-      brands: [
-        {
-         brand: 'Not;A=Brand',
-         version: '99'
-        },
-        {
-          brand: "Chromium",
-          version: currentVersion.split('.')[0]
-        },
-        {
-          brand: "Google Chrome",
-          version: currentVersion.split('.')[0]
-        }
-      ],
-      
-    }
-  };
-
-  obj.data.webGL =  windowsWebGLProfiles[Math.floor(Math.random()*windowsWebGLProfiles.length)];
-
-  return obj.data
-}
-//const GUA = getUserAgent();
-//fs.writeFileSync('obj.json', JSON.stringify(GUA, null, 2));
-
-//module.exports = GUA;
 
 const windowsScreenResolutions = [
-  "1920x1080",  // Full HD
-  "1366x768",   // ноутбуки низкого разрешения
-  "1440x900",   // MacBook старых моделей / 15" экраны
-  "1536x864",   // ультраширокие ноутбуки
-  "1280x720",   // HD
+  "1920x1080",  // Full HD – стандарт для большинства мониторов и ноутбуков
+  "1366x768",   // недорогие ноутбуки
+  "1440x900",   // старые MacBook / 15" экраны
+  "1536x864",   // ультраширокие ноутбуки среднего сегмента
+  "1280x720",   // HD, часто на бюджетных ноутбуках
   "1600x900",   // средние ноутбуки
   "1680x1050",  // старые 16:10 мониторы
-  "1920x1200",  // 16:10 мониторы
-  "2560x1440",  // QHD
-  "2560x1600",  // MacBook Retina
-  "3840x2160",  // 4K UHD
-  "1024x768",   // старые экраны
   "1360x768",   // ноутбуки 13–14"
-  "1440x1080",  // нестандартные 4:3/16:12
-  "1280x800",   // 13" MacBook
-  "1600x1200",  // 4:3 мониторы
-  "1680x945",   // нестандартные 16:9
-  "2048x1152",  // широкие ноутбуки
-  "3200x1800",  // HiDPI ноутбуки
-  "3840x1600"   // ультраширокие 21:9
+  "1280x800"    // 13" MacBook и аналогичные
 ];
+
 
 const windowsWebGLProfiles = [
   { vendor: "NVIDIA Corporation", renderer: "GeForce RTX 4090" },
@@ -210,18 +58,24 @@ function genUAWindows(){
   const system = 'Win64';
   const architecture = 'x64';
 
-  const currentVersion = Math.floor(Math.random()*20) + 120;
-  const browsers = [` OPR/${currentVersion}.0.0.0`, ` Edg/${currentVersion}.0.0.0`, '', `Firefox/${currentVersion}.0`];
-  const browserSuffix = browsers[Math.floor(Math.random() * browsers.length)];
-  const engine = 'AppleWebKit/537.36'
-  const versionBrowser = `Chrome/${currentVersion}.0.0.0 Safari/537.36${browserSuffix}`;
+  
+  const browsers = [ (cv) => ` OPR/${cv}.0.0.0`, (cv) => ` Edg/${cv}.0.0.0`, (cv) => ''];
+  const isOpr = Math.floor(Math.random() * browsers.length);
+  const browserSuffix = browsers[isOpr];
+  const currentVersion = isOpr === 0 ?  Math.floor(Math.random()*10) + 110 : Math.floor(Math.random()*20) + 120;
+  const brw = browserSuffix(currentVersion);
+  
 
-  const uaFirefox = `Mozilla/5.0 (${platform}; ${system}; ${architecture}; rv:${currentVersion}.0) Gecko/20100101 Firefox/${currentVersion}.0`;
+  
+  const engine = 'AppleWebKit/537.36'
+  const versionBrowser = `Chrome/${currentVersion}.0.0.0 Safari/537.36${brw}`;
+
+  
   const uaChromium = `Mozilla/5.0 (${platform}; ${system}; ${architecture}) ${engine} (KHTML, like Gecko) ${versionBrowser}`;
 
   return {
-    userAgent: browserSuffix.includes('Firefox') ? uaFirefox : uaChromium,
-    platform, system, architecture, currentVersion, engine, browserSuffix
+    userAgent: uaChromium,
+    platform, system, architecture, currentVersion, engine, browserSuffix:brw
   }
 
 }
@@ -229,7 +83,7 @@ function genUAWindows(){
 
 
 function genConnectionInfo() {
-  const types = ["slow-2g", "2g", "3g", "4g", "5g", "wifi"];
+  const types = [ "3g", "4g", "5g", "wifi"];
   const effectiveType = types[Math.floor(Math.random() * types.length)];
 
   // RTT (Round-Trip Time) зависит от типа сети
@@ -237,8 +91,6 @@ function genConnectionInfo() {
   let downlink;
 
   switch(effectiveType) {
-    case "slow-2g": rtt = 1000; downlink = 0.05; break;
-    case "2g":      rtt = 300;  downlink = 0.1;  break;
     case "3g":      rtt = 100;  downlink = 1.5;  break;
     case "4g":      rtt = 50;   downlink = 10;   break;
     case "5g":      rtt = 20;   downlink = 100;  break;
@@ -254,12 +106,15 @@ function genConnectionInfo() {
 
 
 
-function createUserAgentWindows2(){
+function createUserAgentWindows(){
   const obj = genUAWindows();
 
-  const arrMemoryWin = [4, 8, 16, 32];
-  
-  const currentDeviceMemory = arrMemoryWin[Math.floor(Math.random()*arrMemoryWin.length)];
+ 
+
+   // RAM в гигабайтах (то, что возвращает navigator.deviceMemory)
+   const arrMemoryWin = [2, 4, 8, 16, 32];
+   const currentDeviceMemory = arrMemoryWin[Math.floor(Math.random() * arrMemoryWin.length)];
+ 
   const currentScreen = windowsScreenResolutions[Math.floor(Math.random() * windowsScreenResolutions.length)].split('x');
   const width = parseInt(currentScreen[0]);
   const height = parseInt(currentScreen[1]);
@@ -269,10 +124,12 @@ function createUserAgentWindows2(){
   const windowHeight = Math.floor(height * (0.7 + Math.random() * 0.3));
 
   return {
+    
     width,
     height,
     windowWidth,
     windowHeight,
+    platform: 'Win32',
     connection: genConnectionInfo(),
     userAgent: obj.userAgent,
     appName: 'Netscape',
@@ -313,13 +170,156 @@ function createUserAgentWindows2(){
   
 }
 
-const cuaw = createUserAgentWindows2();
 
-fs.writeFileSync('obj_1.json', JSON.stringify(cuaw, null, 2));
+
+
+const androidScreenResolutions = [
+  "720x1280",  // HD
+  "720x1440",  // бюджетные смартфоны с вытянутым экраном
+  "1080x1920", // Full HD
+  "1080x2160", // обычные Full HD+ бюджетные
+  "1080x2220", // бюджетные LG, Samsung mid-range
+  "1080x2280", // бюджетные Xiaomi, Samsung
+  "1080x2310", // средний сегмент
+  "1080x2340"  // распространённые модели бюджетных Samsung / Xiaomi
+];
+
+
+const androidWebGLProfiles = [
+  { vendor: "ARM", renderer: "Mali-G78" },
+  { vendor: "ARM", renderer: "Mali-G77" },
+  { vendor: "ARM", renderer: "Mali-G76" },
+  { vendor: "ARM", renderer: "Mali-G72" },
+  { vendor: "ARM", renderer: "Mali-G71" },
+  { vendor: "ARM", renderer: "Mali-G57" },
+  { vendor: "ARM", renderer: "Mali-G52" },
+  { vendor: "Qualcomm", renderer: "Adreno 650" },
+  { vendor: "Qualcomm", renderer: "Adreno 640" },
+  { vendor: "Qualcomm", renderer: "Adreno 630" },
+  { vendor: "Qualcomm", renderer: "Adreno 618" },
+  { vendor: "Qualcomm", renderer: "Adreno 616" },
+  { vendor: "Qualcomm", renderer: "Adreno 512" },
+  { vendor: "Qualcomm", renderer: "Adreno 530" },
+  { vendor: "Imagination Technologies", renderer: "PowerVR GM9446" },
+  { vendor: "Imagination Technologies", renderer: "PowerVR GM9445" },
+  { vendor: "Imagination Technologies", renderer: "PowerVR GX6250" },
+  { vendor: "Imagination Technologies", renderer: "PowerVR GE8320" },
+  { vendor: "Intel Inc.", renderer: "UHD Graphics 620" } // встречается на некоторых Android эмуляторах
+];
+
+
+function genUAAndroid() {
+  const androidVersions = ["12", "13", "14"];
+  const version = androidVersions[Math.floor(Math.random() * androidVersions.length)];
+
+  const browsers = [
+    (cv) => ` Chrome/${cv}.0.0.0 Mobile Safari/537.36`,
+    (cv) => ` EdgA/${cv}.0.0.0 Mobile Safari/537.36`,
+    (cv) => ` OPR/${cv}.0.0.0 Mobile Safari/537.36`
+  ];
+
+  const isBrowser = Math.floor(Math.random() * browsers.length);
+  const currentVersion = 100 + Math.floor(Math.random() * 30);
+  const browserSuffix = browsers[isBrowser](currentVersion);
+
+  const ua = `Mozilla/5.0 (Linux; Android ${version}; Mobile) AppleWebKit/537.36 (KHTML, like Gecko)${browserSuffix}`;
+
+  return {
+    userAgent: ua,
+    version,
+    currentVersion,
+    browserSuffix: ua.includes("EdgA") ? "Edge" : ua.includes("OPR") ? "Opera" : "Chrome"
+  };
+}
+
+function genConnectionInfoAndroid() {
+  const types = ["3g", "4g", "5g", "wifi"];
+  const effectiveType = types[Math.floor(Math.random() * types.length)];
+
+  let rtt, downlink;
+  switch(effectiveType) {
+    case "3g": rtt = 100; downlink = 1.5; break;
+    case "4g": rtt = 50; downlink = 10; break;
+    case "5g": rtt = 20; downlink = 100; break;
+    case "wifi": rtt = 30; downlink = 30; break;
+  }
+
+  rtt = Math.floor(rtt * (0.8 + Math.random() * 0.4));
+  downlink = +(downlink * (0.8 + Math.random() * 0.4)).toFixed(1);
+
+  return { effectiveType, rtt, downlink };
+}
+
+function createUserAgentAndroid() {
+  const obj = genUAAndroid();
+
+  const deviceMemoryOptions = [2, 3, 4, 6, 8];
+  const currentDeviceMemory = deviceMemoryOptions[Math.floor(Math.random() * deviceMemoryOptions.length)];
+
+  const screen = androidScreenResolutions[Math.floor(Math.random() * androidScreenResolutions.length)].split('x');
+  const width = parseInt(screen[0]);
+  const height = parseInt(screen[1]);
+
+  const windowWidth = Math.floor(width * (0.7 + Math.random() * 0.3));
+  const windowHeight = Math.floor(height * (0.7 + Math.random() * 0.3));
+
+  return {
+    width,
+    height,
+    windowWidth,
+    windowHeight,
+    platform: Math.floor(Math.random()*2) ? 'Linux armv8l' : 'Linux aarch64',
+    connection: genConnectionInfoAndroid(),
+    userAgent: obj.userAgent,
+    appName: 'Netscape',
+    vendor: 'Google Inc.',
+    appCodeName: 'Mozilla',
+    appVersion: obj.userAgent.split('Mozilla/')[1],
+    deviceMemory: currentDeviceMemory,
+    hardwareConcurrency: currentDeviceMemory + 2,
+    product: 'Gecko',
+    setUserAgentOverride: {
+      userAgent: obj.userAgent,
+      userAgentMetadata: {
+        fullVersion: `${obj.currentVersion}.0.0.0`,
+        platform: 'Android',
+        platformVersion: obj.version,
+        architecture: 'arm64',
+        mobile: true,
+        model: "Generic Android",
+        brands: [
+          { brand: 'Not;A=Brand', version: '99' },
+          { brand: 'Chromium', version: `${obj.currentVersion}` },
+          { brand: obj.browserSuffix, version: `${obj.currentVersion}` }
+        ]
+      }
+    },
+    webGL: androidWebGLProfiles[Math.floor(Math.random() * androidWebGLProfiles.length)]
+  };
+}
+
+
+
+
+
+
+
+
+function getUserAgent(){
+  const kf = Math.floor(Math.random()*100);
+  if(kf < 40){
+    return createUserAgentAndroid();
+  }
+  else{
+    return createUserAgentWindows();
+  }
+}
+
+
+const cuaw = getUserAgent();
+
+
+
+//fs.writeFileSync('obj_1.json', JSON.stringify(cuaw, null, 2));
 
 module.exports = cuaw;
-
-
-//fs.writeFileSync('obj.json', JSON.stringify(createUserAgentWindows(), null, 2));
-
-

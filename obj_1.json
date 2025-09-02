@@ -1,30 +1,31 @@
 {
-  "width": 2560,
-  "height": 1600,
-  "windowWidth": 1931,
-  "windowHeight": 1171,
+  "width": 1080,
+  "height": 2310,
+  "windowWidth": 1077,
+  "windowHeight": 1681,
+  "platform": "Linux armv8l",
   "connection": {
-    "effectiveType": "wifi",
-    "rtt": 26,
-    "downlink": 30.5
+    "effectiveType": "4g",
+    "rtt": 55,
+    "downlink": 12
   },
-  "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+  "userAgent": "Mozilla/5.0 (Linux; Android 13; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36",
   "appName": "Netscape",
   "vendor": "Google Inc.",
   "appCodeName": "Mozilla",
-  "appVersion": "5.0 (Windows NT 11.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
-  "deviceMemory": 32,
-  "hardwareConcurrency": 34,
+  "appVersion": "5.0 (Linux; Android 13; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36",
+  "deviceMemory": 4,
+  "hardwareConcurrency": 6,
   "product": "Gecko",
   "setUserAgentOverride": {
-    "userAgent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "userAgent": "Mozilla/5.0 (Linux; Android 13; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36",
     "userAgentMetadata": {
-      "fullVersion": "121.0.0.0",
-      "platform": "Windows",
-      "platformVersion": "11.0",
-      "architecture": "x64",
-      "mobile": false,
-      "model": "",
+      "fullVersion": "127.0.0.0",
+      "platform": "Android",
+      "platformVersion": "13",
+      "architecture": "arm64",
+      "mobile": true,
+      "model": "Generic Android",
       "brands": [
         {
           "brand": "Not;A=Brand",
@@ -32,17 +33,17 @@
         },
         {
           "brand": "Chromium",
-          "version": "121"
+          "version": "127"
         },
         {
-          "brand": "Google Chrome",
-          "version": "121"
+          "brand": "Chrome",
+          "version": "127"
         }
       ]
     }
   },
   "webGL": {
-    "vendor": "NVIDIA Corporation",
-    "renderer": "GeForce RTX 3070"
+    "vendor": "Qualcomm",
+    "renderer": "Adreno 640"
   }
 }
