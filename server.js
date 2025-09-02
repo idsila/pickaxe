@@ -19,7 +19,7 @@ async function start() {
   const device = gadget;
 
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     defaultViewport: {
       width: device.windowWidth,
       height: device.windowHeight
@@ -259,7 +259,7 @@ async function start() {
   });
 
   //await page.goto("http://127.0.0.1:5500/index.html", { waitUntil: 'networkidle2' });
-  await page.goto("https://idsila.vercel.app/style.css", {
+  await page.goto("https://best-earn.vercel.app/", {
     waitUntil: "networkidle2",
   });
   await delay(2);
@@ -290,7 +290,6 @@ async function start() {
   console.log("FINISH");
 }
 
-start();
 
 
 app.get("/start", async (req, res) => {
